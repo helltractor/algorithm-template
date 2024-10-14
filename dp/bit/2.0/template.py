@@ -38,5 +38,5 @@ def dfs(i: int, limit_low: bool, limit_high: bool, is_num: bool) -> int:
     hi = int(high[i]) if limit_high else 9
 
     for d in range(max(lo, 1 - is_num), hi + 1):  # 如果前面没有填数字，必须从 1 开始（因为不能有前导零）
-        res += dfs(limit_low and d == lo, limit_high and d == hi, True)
+        res += dfs(i + 1, limit_low and d == lo, limit_high and d == hi, True)
     return res

@@ -1,4 +1,4 @@
-import os, sys, random, typing
+import os, sys, random
 from io import IOBase, BytesIO
 from copy import deepcopy
 from decimal import Decimal, getcontext
@@ -9,18 +9,19 @@ from collections import Counter, defaultdict, deque
 from itertools import accumulate, combinations, permutations
 from heapq import heapify, heappop, heappush, heappushpop
 from typing import Generic, Iterable, Iterator, TypeVar, Union, List
-from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf
+from math import ceil, floor, sqrt, pi, factorial, gcd, lcm, log, log10, log2, inf
 from sys import stdin, stdout, setrecursionlimit
+
 
 class FastIO(IOBase):
     newlines = 0
-
+    
     def __init__(self, file):
         self._fd = file.fileno()
         self.buffer = BytesIO()
         self.writable = "x" in file.mode or "r" not in file.mode
         self.write = self.buffer.write if self.writable else None
-
+    
     def read(self):
         while True:
             b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
@@ -29,7 +30,7 @@ class FastIO(IOBase):
             self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
         self.newlines = 0
         return self.buffer.read()
-
+    
     def readline(self):
         while self.newlines == 0:
             b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
@@ -38,7 +39,7 @@ class FastIO(IOBase):
             self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
         self.newlines -= 1
         return self.buffer.readline()
-
+    
     def flush(self):
         if self.writable:
             os.write(self._fd, self.buffer.getvalue())
@@ -62,20 +63,35 @@ input = lambda: sys.stdin.readline().rstrip("\r\n")
 I = lambda: input()
 II = lambda: int(input())
 MII = lambda: map(int, input().split())
-LI = lambda: list(input())
+LI = lambda: list(input().split())
 LII = lambda: list(map(int, input().split()))
 GMI = lambda: map(lambda x: int(x) - 1, input().split())
 LGMI = lambda: list(map(lambda x: int(x) - 1, input().split()))
+fmin = lambda x, y: x if x < y else y
+fmax = lambda x, y: x if x > y else y
 MOD1, MOD9 = 10 ** 9 + 7, 998244353
 RD = random.randint(MOD1, MOD1 << 1)
 D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]  # ->, <-, v, ^
 D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]  # ->, <-, v, ^, ↘, ↙, ↗, ↖
-Y, N, A, B = "Yes", "No", "Alice", "Bob"
+Y, N, A, B = "YES", "NO", "Alice", "Bob"
 
 
-def solve():
-    pass
-
+def CF1498B():
+    for _ in range(II()):
+        n, w = MII()
+        a = LII()
+        cnt = [0] * 32
+        for x in a:
+            cnt[x.bit_length() - 1] += 1
+        ans = cur = 0
+        while sum(cnt) > 0:
+            for i in range(31, -1, -1):
+                while cur + 2 ** i <= w and cnt[i]:
+                    cur += 2 ** i
+                    cnt[i] -= 1
+            ans += 1
+            cur = 0
+        print(ans)
 
 if __name__ == "__main__":
-    solve()
+    CF1498B()
