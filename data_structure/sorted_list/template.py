@@ -1,6 +1,6 @@
 # _*_ coding: utf-8 _*_
 # @File : template.py
-# @Time : daily/3/11 16:00
+# @Time : 2024/3/11 16:00
 
 
 class SortedList:

@@ -1,6 +1,6 @@
 # _*_ coding: utf-8 _*_
 # @File : kmp.py
-# @Time : daily/1/14 12:12
+# @Time : 2024/1/14 12:12
 
 
 class KMP:

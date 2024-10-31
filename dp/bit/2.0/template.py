@@ -1,6 +1,6 @@
 # _*_ coding: utf-8 _*_
 # @File : template.py
-# @Time : daily/4/21 19:59
+# @Time : 2024/4/21 19:59
 """
     上下边界数位dp模板
     limitHigh 表示当前是否受到了 finish 的约束（我们要构造的数字不能超过 finish。若为真，则第 iii 位填入的数字至多为 finish[i]，否则至多为 9，

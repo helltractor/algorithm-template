@@ -1,6 +1,6 @@
 # _*_ coding: utf-8 _*_
 # @File : string_hash.py
-# @Time : daily/3/11 15:50
+# @Time : 2024/3/11 15:50
 
 
 class StringHash:

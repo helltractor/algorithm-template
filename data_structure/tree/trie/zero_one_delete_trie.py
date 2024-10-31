@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # @File : zero_one_delete_trie.py
-# @Time : daily/8/24 下午1:13
+# @Time : 2024/8/24 下午1:13
 
 
 class Node:

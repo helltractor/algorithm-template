@@ -1,6 +1,6 @@
 # _*_ coding: utf-8 _*_
 # @File : trinary_search.py
-# @Time : daily/8/7 上午1:46
+# @Time : 2024/8/7 上午1:46
 
 
 def trinary_search(l: int, r: int, target: int, f: callable) -> int:

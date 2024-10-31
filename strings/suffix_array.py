@@ -1,6 +1,6 @@
 # _*_ coding: utf-8 _*_
 # @File : suffix_array.py
-# @Time : daily/4/6 17:45
+# @Time : 2024/4/6 17:45
 from collections import defaultdict
 
 

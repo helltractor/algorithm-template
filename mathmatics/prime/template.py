@@ -1,6 +1,6 @@
 # _*_ coding: utf-8 _*_
 # @File : template.py
-# @Time : daily/8/2 下午2:56
+# @Time : 2024/8/2 下午2:56
 from collections import Counter
 from typing import List
 

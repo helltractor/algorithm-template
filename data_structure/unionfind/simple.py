@@ -1,6 +1,6 @@
 # _*_ coding: utf-8 _*_
 # @File : simple.py
-# @Time : daily/7/15 下午2:21
+# @Time : 2024/7/15 下午2:21
 
 
 parent = list(range(n))

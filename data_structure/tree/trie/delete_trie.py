@@ -1,6 +1,6 @@
 # _*_ coding: utf-8 _*_
 # @File : delete_trie.py
-# @Time : daily/8/5 下午1:58
+# @Time : 2024/8/5 下午1:58
 
 
 class Node:

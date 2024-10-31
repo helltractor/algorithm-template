@@ -1,6 +1,6 @@
 # _*_ coding: utf-8 _*_
 # @File : simple_trie.py
-# @Time : daily/8/5 下午1:54
+# @Time : 2024/8/5 下午1:54
 
 from collections import defaultdict
 

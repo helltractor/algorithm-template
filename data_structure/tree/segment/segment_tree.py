@@ -1,14 +1,22 @@
 # _*_ coding: utf-8 _*_
 # @File : segment_tree.py
-# @Time : daily/6/7 上午11:51
+# @Time : 2024/6/7 上午11:51
 import typing
 
 
 class SegTree:
+    __slots__ = ["_op", "_e", "_n", "_log", "_size", "_d"]
+    
     def __init__(self,
                  op: typing.Callable[[typing.Any, typing.Any], typing.Any],
                  e: typing.Any,
                  v: typing.Union[int, typing.List[typing.Any]]) -> None:
+        """
+        Args:
+            op: maintain operation function, such as add, max, min, etc.
+            e: initial value of the segment tree
+            v: initial value of the array
+        """
         self._op = op
         self._e = e
         
