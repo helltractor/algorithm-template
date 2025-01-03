@@ -9,7 +9,7 @@ class ZFunction:
         self.z = self.computeZ()
         
     @staticmethod
-    def z_function(t: str) -> list:
+    def z_function(t: str) -> List[int]:
         z = [0] * len(t)
         l = r = 0
         for i in range(1, len(t)):
