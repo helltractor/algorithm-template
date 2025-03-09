@@ -1,5 +1,5 @@
-# _*_ coding: utf-8 _*_
-# @File : string_hash.py
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # @Time : 2024/3/11 15:50
 
 

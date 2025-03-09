@@ -1,6 +1,7 @@
-# _*_ coding: utf-8 _*_
-# @File : segment_tree.py
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # @Time : 2024/6/7 上午11:51
+
 import typing
 
 

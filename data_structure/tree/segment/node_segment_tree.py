@@ -1,5 +1,5 @@
-# _*_ coding: utf-8 _*_
-# @File : node_segment_tree.py
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # @Time : 2023/12/16 21:09
 
 

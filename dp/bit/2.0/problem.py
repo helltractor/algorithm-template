@@ -1,6 +1,7 @@
-# _*_ coding: utf-8 _*_
-# @File : problem.py
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # @Time : 2024/4/21 19:59
+
 from functools import cache
 
 

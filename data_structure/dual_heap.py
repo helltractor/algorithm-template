@@ -1,5 +1,5 @@
-# _*_ coding: utf-8 _*_
-# @File : dual_heap.py
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # @Time : 2024/2/1 12:32
 
 from collections import Counter

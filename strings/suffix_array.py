@@ -1,5 +1,5 @@
-# _*_ coding: utf-8 _*_
-# @File : suffix_array.py
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # @Time : 2024/4/6 17:45
 from collections import defaultdict
 

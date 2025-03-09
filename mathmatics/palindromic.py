@@ -1,5 +1,5 @@
-# _*_ coding: utf-8 _*_
-# @File : palindromic.py
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # @Time : 2023/12/17 12:25
 
 

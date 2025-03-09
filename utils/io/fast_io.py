@@ -1,6 +1,7 @@
-# _*_ coding: utf-8 _*_
-# @File : fast_io.py
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # @Time : 2024/4/30 21:09
+
 import os
 import sys
 from io import IOBase, BytesIO

@@ -1,6 +1,7 @@
-# _*_ coding: utf-8 _*_
-# @File : template.py
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # @Time : 2024/4/21 19:55
+
 """
     mask 表示前面选过的数字集合，换句话说，第 i 位要选的数字不能在 mask 中。
 

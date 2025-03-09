@@ -1,5 +1,5 @@
-# _*_ coding: utf-8 _*_
-# @File : power.py
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # @Time : 2023/11/30 19:57
 
 
