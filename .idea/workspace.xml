@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60804908-aef1-4d82-a64d-8a2fd6ce1c5b" name="更改" comment="Update some changes and upload coding in the past two months">
-      <change afterPath="$PROJECT_DIR$/data_structure/tree/segment/node_segment_tree_sum.py" afterDir="false" />
+    <list default="true" id="60804908-aef1-4d82-a64d-8a2fd6ce1c5b" name="更改" comment="Update wo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_structure/tree/trie/delete_trie.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_structure/tree/trie/simple_trie.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/simple/trie.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_structure/tree/trie/trie.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_structure/tree/trie/trie.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_structure/tree/trie/zero_one_delete_trie.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_structure/tree/trie/zero_one_trie.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_structure/unionfind/simple.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic/simple/unionfind.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,6 +238,7 @@
     &quot;Python.rename.executor&quot;: &quot;Run&quot;,
     &quot;Python.test (1).executor&quot;: &quot;Run&quot;,
     &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.trie.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
@@ -256,11 +261,11 @@
       <recent name="D:\Python\Algorithm-template\Contests\codeforces\Daily" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Python\algorithm-template\basic\simple" />
       <recent name="D:\Python\algorithm-template\__contest__\codeforces" />
       <recent name="D:\Python\algorithm-template\__contest__\template" />
       <recent name="D:\Python\algorithm-template\__accepted__\daily\2024\09" />
       <recent name="D:\Python\algorithm-template\__accepted__\daily\2024-9-20" />
-      <recent name="D:\Python\algorithm-template\__accepted__\daily\2024-9-19" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -281,6 +286,36 @@
       <visibility group="运行 pip 命令" flag="true" />
       <visibility group="运行配置" flag="true" />
     </myKeys>
+  </component>
+  <component name="RunManager">
+    <configuration name="trie" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Algorithm-template" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_structure/tree/trie" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_structure/tree/trie/trie.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.trie" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -411,6 +446,14 @@
       <workItem from="1735877859056" duration="1907000" />
       <workItem from="1736046144361" duration="4945000" />
       <workItem from="1736652022548" duration="625000" />
+      <workItem from="1736763980673" duration="119000" />
+      <workItem from="1740619485270" duration="195000" />
+      <workItem from="1740619690557" duration="389000" />
+      <workItem from="1741508822866" duration="1579000" />
+      <workItem from="1741590896929" duration="20000" />
+      <workItem from="1742051173769" duration="9843000" />
+      <workItem from="1742192610372" duration="8000" />
+      <workItem from="1742697233989" duration="1349000" />
     </task>
     <task id="LOCAL-00001" summary="Upload: codeforces daily 2024-5-27">
       <option name="closed" value="true" />
@@ -740,7 +783,31 @@
       <option name="project" value="LOCAL" />
       <updated>1735882474599</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Add node segment tree calculate interval sum">
+      <option name="closed" value="true" />
+      <created>1736764084808</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1736764084808</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Update template annotation">
+      <option name="closed" value="true" />
+      <created>1741510259721</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1741510259721</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Delete docs">
+      <option name="closed" value="true" />
+      <created>1741510281712</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1741510281712</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -765,9 +832,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Upload Codeforces Round 944 (Div. 4) code&#10;&#10;Signed-off-by: helltractor &lt;1664309610@qq.com&gt;" />
-    <MESSAGE value="Upload Codeforces Round 944 (Div. 4) code&#10;&#10;Signed-off-by: helltractor &lt;1664309610@qq.com&gt;" />
-    <MESSAGE value="Upload code in the past week&#10;&#10;Signed-off-by: Helltractor &lt;1664309610@qq.com&gt;" />
     <MESSAGE value="Upload some code in the past week&#10;&#10;Signed-off-by: Helltractor &lt;1664309610@qq.com&gt;" />
     <MESSAGE value="Upload Codeforces Round (Div2) code&#10;&#10;Signed-off-by: helltractor &lt;1664309610@qq.com&gt;" />
     <MESSAGE value="Upload Codeforces Round (Div2) code&#10;&#10;Signed-off-by: helltractor &lt;1664309610@qq.com&gt;" />
@@ -790,11 +854,14 @@
     <MESSAGE value="Update some changes and upload coding in the past week" />
     <MESSAGE value="Update some changes and upload coding in the past half-month" />
     <MESSAGE value="Update some changes and upload coding in the past two months" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update some changes and upload coding in the past two months" />
+    <MESSAGE value="Add node segment tree calculate interval sum" />
+    <MESSAGE value="Update template annotation" />
+    <MESSAGE value="Delete docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete docs" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Algorithm_Template$CF1956C.coverage" NAME="CF1956C 覆盖结果" MODIFIED="1726383337485" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/__accepted__/daily/2024-9-14" />
     <SUITE FILE_PATH="coverage/Algorithm_Template$cf_1891C.coverage" NAME="cf_1891C 覆盖结果" MODIFIED="1721287751327" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/__daily__/period/2024-7-3" />
+    <SUITE FILE_PATH="coverage/Algorithm_Template$CF1956C.coverage" NAME="CF1956C 覆盖结果" MODIFIED="1726383337485" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/__accepted__/daily/2024-9-14" />
     <SUITE FILE_PATH="coverage/Algorithm_Template$CF2003B.coverage" NAME="CF2003B 覆盖结果" MODIFIED="1727279051810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/__accepted__/daily/2024/09/25" />
     <SUITE FILE_PATH="coverage/Algorithm_Template$cf_213B.coverage" NAME="cf_213B 覆盖结果" MODIFIED="1725517110142" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/__daily__/period/2024-9-1" />
     <SUITE FILE_PATH="coverage/Algorithm_Template$CF1856C.coverage" NAME="CF1856C 覆盖结果" MODIFIED="1726386058461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/__accepted__/daily/2024-9-14" />
@@ -840,6 +907,7 @@
     <SUITE FILE_PATH="coverage/Algorithm_Template$cf_1167E.coverage" NAME="cf_1167E 覆盖结果" MODIFIED="1721292692861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/__daily__/period/2024-7-3" />
     <SUITE FILE_PATH="coverage/Algorithm_Template$CF1879D.coverage" NAME="CF1879D 覆盖结果" MODIFIED="1725682775612" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/__daily__/period/2024-6-2" />
     <SUITE FILE_PATH="coverage/Algorithm_Template$cf_582B.coverage" NAME="cf_582B 覆盖结果" MODIFIED="1720677230655" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/__daily__/period/2024-7-2" />
+    <SUITE FILE_PATH="coverage/algorithm_template$trie.coverage" NAME="trie 覆盖结果" MODIFIED="1742120916099" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_structure/tree/trie" />
     <SUITE FILE_PATH="coverage/Algorithm_Template$CF429B.coverage" NAME="CF429B 覆盖结果" MODIFIED="1727524395582" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/__accepted__/daily/2024/09/28" />
     <SUITE FILE_PATH="coverage/Algorithm_Template$CF1997D.coverage" NAME="CF1997D 覆盖结果" MODIFIED="1726536407435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/__accepted__/daily/2024-9-17" />
     <SUITE FILE_PATH="coverage/Algorithm_Template$cf_1037C.coverage" NAME="cf_1037C 覆盖结果" MODIFIED="1722568132837" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/__daily__/period/2024-8-1" />

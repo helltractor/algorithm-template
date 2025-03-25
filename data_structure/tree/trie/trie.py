@@ -1,15 +1,14 @@
-# _*_ coding: utf-8 _*_
-# @File : trie.py
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # @Time : 2023/12/10 21:42
-from collections import defaultdict
 
 
 class Node:
-    __slots__ = ['son', 'is_end']
+    __slots__ = ['son', 'cnt', 'is_end']
 
     def __init__(self):
-        # self.son = dict()
-        self.son = defaultdict(Node)
+        self.son = dict()
+        self.cnt = 0
         self.is_end = False
 
 
@@ -18,24 +17,49 @@ class Trie:
         self.root = Node()
 
     def insert(self, word: str) -> None:
-        cur = self.root  # 从根节点开始插入单词的字符
+        cur = self.root
         for char in word:
-            cur = cur.son[char]  # 移动到下一个节点
-        cur.is_end = True  # 标记最后一个节点为单词的结尾
+            if char not in cur.son:
+                cur.son[char] = Node()
+            cur = cur.son[char]
+            cur.cnt += 1
+        cur.is_end = True
 
     def search(self, word: str) -> bool:
-        cur = self.root  # 从根节点开始搜索单词
+        cur = self.root
         for char in word:
             cur = cur.son.get(char)
-            if cur is None:  # 如果字符不存在，单词不存在
+            if cur is None:
                 return False
-            cur = cur.son[char]  # 移动到下一个节点
-        return cur.is_end  # 返回最后一个节点是否标记为单词的结尾
+        return cur.is_end
 
-    def startsWith(self, prefix: str) -> bool:  # 检查是否存在以给定前缀开头的单词
+    def startsWith(self, prefix: str) -> bool:
         cur = self.root
-        for c in prefix:
-            cur = cur.son.get(c)
+        for char in prefix:
+            cur = cur.son.get(char)
             if cur is None:
                 return False
         return True
+    
+    def delete(self, word: str):
+        def _delete(cur: Node, word: str, index: int) -> bool:
+            if index == len(word):
+                if cur.is_end:
+                    cur.is_end = False
+                    return len(cur.son) == 0  # 如果没有子节点，可以删除该节点
+                return False
+            
+            char = word[index]
+            if char not in cur.son:
+                return False
+            
+            should_delete = _delete(cur.son[char], word, index + 1)
+            
+            if should_delete:
+                del cur.son[char]
+                
+            cur.cnt -= 1
+            return len(cur.son) == 0 and not cur.is_end
+        
+        _delete(self.root, word, 0)
+        
