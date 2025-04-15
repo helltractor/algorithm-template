@@ -2,7 +2,7 @@
 # @Time : 2023/11/13 14:42
 
 
-class Fenwick:
+class FenwickTree:
     __slots__ = ["n", "c"]
 
     def __init__(self, n):

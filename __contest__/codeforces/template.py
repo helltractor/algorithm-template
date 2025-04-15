@@ -33,7 +33,6 @@ if ImportType:
     # getcontext().prec=100 修改精度
     from sys import stdin, stdout, setrecursionlimit
 
-
 if InputType:
     input = lambda: sys.stdin.readline().rstrip("\r\n")
     I = lambda: input()
@@ -150,14 +149,10 @@ if ConstType:
     A, B = "Alice", "Bob"
 
 
-def solve():
+def helltractor():
     pass
 
 
-def main():
-    solve()
-    return
-
-
 if __name__ == "__main__":
-    main()
+    helltractor()
+    
