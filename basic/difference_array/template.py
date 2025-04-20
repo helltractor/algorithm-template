@@ -8,7 +8,7 @@ from typing import List
 class Difference2D:
     __slots__ = ["m", "n", "diff"]
     
-    def __init__(self, m, n):
+    def __init__(self, m: int, n: int):
         self.m = m
         self.n = n
         self.diff = [[0] * (n + 2) for _ in range(m + 2)]

@@ -1,6 +1,4 @@
-package strings;
-
-import java.util.Arrays;
+package string_hash;
 
 class StringHash {
     

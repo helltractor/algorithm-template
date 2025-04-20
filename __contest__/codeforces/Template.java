@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.util.Random;
 import java.util.StringTokenizer;
 
-public class ${NAME} {
+public class Template {
 
     public static void main(String[] args) {
         FastScanner fs = new FastScanner();
@@ -91,4 +91,5 @@ public class ${NAME} {
             return Long.parseLong(next());
         }
     }
+
 }

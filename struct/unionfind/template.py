@@ -4,14 +4,13 @@
 
 
 class UnionFind:
-    def __init__(self, n):
+    def __init__(self, n: int):
         self.n = n
-        self.parent = {}
+        self.parent = list(range(n))
         self.rank = [1] * n
         self.size = [1] * n
-
+    
     def find(self, x):
-        self.parent.setdefault(x, x)
         if self.parent[x] == x:
             return x
         self.parent[x] = self.find(self.parent[x])
@@ -39,4 +38,4 @@ class UnionFind:
     
     def connected(self, x: int, y: int):
         return self.find(x) == self.find(y)
-    
+   
