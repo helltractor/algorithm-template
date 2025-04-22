@@ -5,7 +5,7 @@
 import time
 import unittest
 
-from mathmatics.prime.template import Primes
+from math.prime_factor.template import Primes
 
 
 class MyTestCase(unittest.TestCase):
