@@ -7,9 +7,11 @@ from functools import cache
 
 class Solution:
     
-    # https://leetcode.cn/problems/count-the-number-of-powerful-integers/
     @staticmethod
-    def numberOfPowerfulInt(self, start: int, finish: int, limit: int, s: str) -> int:
+    def lc_2999(self, start: int, finish: int, limit: int, s: str) -> int:
+        """
+        link: https://leetcode.cn/problems/count-the-number-of-powerful-integers/
+        """
         low = str(start)
         high = str(finish)
         n = len(high)
@@ -38,9 +40,11 @@ class Solution:
 
         return dfs(0, True, True)
 
-    # https://leetcode.cn/problems/number-of-beautiful-integers-in-the-range/
     @staticmethod
-    def numberOfBeautifulIntegers(self, low: int, high: int, k: int) -> int:
+    def lc_2827(self, low: int, high: int, k: int) -> int:
+        """
+        link: https://leetcode.cn/problems/number-of-beautiful-integers-in-the-range/
+        """
         low, high = str(low), str(high)
         n = len(high)
         diff = n - len(low)
