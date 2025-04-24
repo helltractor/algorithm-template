@@ -1,4 +1,4 @@
-# Bit DP
+# Digit Dynamic Programing
 
 ## 单边界数位 dp 模板 (v1.0)
 
