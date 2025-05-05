@@ -1,8 +1,7 @@
-# Algorithm-template
+# Algorithm Templates and Contest Records
 
 ## Contests (Online Judge)
 
-- [Kaggle](https://www.kaggle.com/competitions)
 - [Codeforces](https://codeforces.com/contests)
 - [AtCoder](https://atcoder.jp/contests/)
 - [LeetCode](https://leetcode.com/contest/)
@@ -16,7 +15,6 @@
 
 ### Python
 
-- [算法通关手册（LeetCode）](https://algo.itcharge.cn/)
 - [PyIsTheBestLang](https://github.com/liupengsay/PyIsTheBestLang)
 - [ac-library-python](https://github.com/not522/ac-library-python/)
 
@@ -29,12 +27,16 @@
 
 - [算法竞赛模板库 by 灵茶山艾府 💭💡🎈](https://github.com/EndlessCheng/codeforces-go)
 
+### TypeScript
+
+- [Algorithms Notes and Templates](https://github.com/981377660LMT/algorithm-study)
+
 ### Myself
 
-- [CodeForces: pypy](__contest__/codeforces/template.py)
-- [CodeForces: java](__contest__/codeforces/Template.java)
-- [NowCoder: pypy](__contest__/nowcode/pypy.py)
-- [NowCoder: python](__contest__/nowcode/python.py)
+- [CodeForces: pypy](template/codeforces/template.py)
+- [CodeForces: java](template/codeforces/Template.java)
+- [NowCoder: pypy](template/nowcode/pypy.py)
+- [NowCoder: python](template/nowcode/python.py)
 
 ## Video Tutorial
 
