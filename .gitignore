@@ -1,6 +1,13 @@
 ## Java compiled files
 *.class
 
-## Project files
-.idea/*
-__pycache__/*
+## Python files
+**/**/__pycache__/
+
+## PyCharm files
+.idea/
+
+## Uv files
+uv.lock
+.python-version
+pyproject.toml

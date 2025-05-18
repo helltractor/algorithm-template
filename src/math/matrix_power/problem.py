@@ -3,6 +3,7 @@
 # @Time : 2025年5月13日 11点39分
 
 from collections import Counter
+from itertools import pairwise
 from typing import List
 
 from math.matrix_power.template import MatrixPower
@@ -19,8 +20,39 @@ class Solution:
             for j in range(i + 1, i + x + 1):
                 a[i][j % 26] = 1
         mt = MatrixPower.matrix_power(a, t, f0)
-        # mt = MatrixPower.matrix_power_numpy(a, t, f0)
+        # mt = MatrixPower.matrix_power_numpy_list(a, t, f0)
         ans = 0
         for k, v in Counter(s).items():
             ans += mt[ord(k) - 97][0] * v
         return ans % 1_000_000_007
+
+    def lc_1931(self, m: int, n: int) -> int:
+        """
+        https://leetcode.cn/problems/painting-a-grid-with-three-different-colors/
+        """
+        def convert(base: int) -> str:
+            res = [0] * m
+            for i in range(m):
+                res[i] = base % 3
+                base //= 3
+            return ''.join(map(str, res[::-1]))
+
+        vaild = []
+        for c in range(3 ** m):
+            c3 = convert(c)
+            for x, y in pairwise(c3):
+                if x == y: break
+            else:
+                vaild.append(c3)
+
+        nv = len(vaild)
+        mat = [[0] * nv for _ in range(nv)]
+        for i, c1 in enumerate(vaild):
+            for j, c2 in enumerate(vaild):
+                for x, y in zip(c1, c2):
+                    if x == y: break
+                else:
+                    mat[i][j] = 1
+        
+        ans = MatrixPower.matrix_power_numpy_list(mat, n - 1, [1] * nv)
+        return sum(ans) % 1_000_000_007
