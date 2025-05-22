@@ -1,37 +1,47 @@
 ImportType = InputType = ConstType = 1
 DecoratorType = FunctinoType = 1
 if ImportType:
-    import os, sys, random, threading
+    import sys, random
+
     # sys.exit() 退出程序
     # sys.setrecursionlimit(10**6) #调整栈空间
-    from random import randint, choice, shuffle
+    from sys import stdin, stdout, setrecursionlimit
+
     # randint(a,b)从[a,b]范围随机选择一个数
     # choice(seq)seq可以是一个列表,元组或字符串,从seq中随机选取一个元素
     # shuffle(x)将一个可变的序列x中的元素打乱
+    from random import randint, choice, shuffle
+
     from copy import deepcopy
     from io import BytesIO, IOBase
     from types import GeneratorType
+
+    # reduce(op, 迭代对象)
     from functools import lru_cache, reduce
-    # reduce(op,迭代对象)
-    from bisect import bisect_left, bisect_right
+
     # bisect_left(x) 大于等于x的第一个下标
     # bisect_right(x) 大于x的第一个下标
+    from bisect import bisect_left, bisect_right
     from collections import Counter, defaultdict, deque
+
+    # accumulate(a) 用a序列生成一个累积迭代器，一般list化前面放个[0]做前缀和用
+    # combinations(a,k) a序列选k个组合迭代器
+    # permutations(a,k) a序列选k个排列迭代器
     from itertools import accumulate, combinations, permutations
-    # accumulate(a)用a序列生成一个累积迭代器，一般list化前面放个[0]做前缀和用
-    # combinations(a,k)a序列选k个 组合迭代器
-    # permutations(a,k)a序列选k个 排列迭代器
-    from heapq import heapify, heappop, heappush
+
     # heapify将列表转为堆
+    from heapq import heapify, heappop, heappush
     from typing import Generic, Iterable, Iterator, TypeVar, Union, List
-    from string import ascii_lowercase, ascii_uppercase, digits
+
     # 小写字母，大写字母，十进制数字
+    from string import ascii_lowercase, ascii_uppercase, digits
+
+    # ceil向上取整，floor向下取整，sqrt开方，factorial阶乘
     from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf
-    # ceil向上取整，floor向下取整 ，sqrt开方 ，factorial阶乘
-    from decimal import Decimal, getcontext
+
     # Decimal(s) 实例化Decimal对象,一般使用字符串
     # getcontext().prec=100 修改精度
-    from sys import stdin, stdout, setrecursionlimit
+    from decimal import Decimal, getcontext
 
 if InputType:
     input = lambda: sys.stdin.readline().rstrip("\r\n")
@@ -44,9 +54,11 @@ if InputType:
     LGMI = lambda: list(map(lambda x: int(x) - 1, input().split()))
 
 if DecoratorType:
+
     def bootstrap(f, stack=[]):
         def wrappedfunc(*args, **kwargs):
-            if stack: return f(*args, **kwargs)
+            if stack:
+                return f(*args, **kwargs)
             else:
                 to = f(*args, **kwargs)
                 while True:
@@ -55,18 +67,22 @@ if DecoratorType:
                         to = next(to)
                     else:
                         stack.pop()
-                        if not stack: break
+                        if not stack:
+                            break
                         to = stack[-1].send(to)
                 return to
+
         return wrappedfunc
 
+
 if FunctinoType:
+
     class Math:
         __slots__ = ["mod", "l", "fact", "inv"]
 
         def __init__(self):
-            self.mod = mod = 10 ** 9 + 7
-            self.l = l = 3 * 10 ** 5 + 5
+            self.mod = mod = 10**9 + 7
+            self.l = l = 3 * 10**5 + 5
             self.fact = fact = [1] * (l + 1)
             self.inv = inv = [1] * (l + 1)
             for i in range(1, l + 1):
@@ -76,7 +92,11 @@ if FunctinoType:
                 inv[i] = inv[i + 1] * (i + 1) % mod
 
         def comb(self, n, r):
-            return self.fact[n] * self.inv[r] % self.mod * self.inv[n - r] % self.mod if n >= r >= 0 else 0
+            return (
+                self.fact[n] * self.inv[r] % self.mod * self.inv[n - r] % self.mod
+                if n >= r >= 0
+                else 0
+            )
 
         def perm(self, n, r):
             return self.fact[n] * self.inv[n - r] % self.mod if n >= r >= 0 else 0
@@ -93,7 +113,12 @@ if FunctinoType:
 
         def find(self, r1: int, c1: int, r2: int, c2: int) -> int:
             """查询以(r1,c1)为左上角，(r2,c2)为右下角的矩形区间内所有值的和"""
-            return self.pre[r2 + 1][c2 + 1] - self.pre[r2 + 1][c1] - self.pre[r1][c2 + 1] + self.pre[r1][c1]
+            return (
+                self.pre[r2 + 1][c2 + 1]
+                - self.pre[r2 + 1][c1]
+                - self.pre[r1][c2 + 1]
+                + self.pre[r1][c1]
+            )
 
     class Difference2D:
         __slots__ = ["m", "n", "diff"]
@@ -140,8 +165,9 @@ if FunctinoType:
                 x -= x & -x
             return s
 
+
 if ConstType:
-    MOD1, MOD9 = 10 ** 9 + 7, 998244353
+    MOD1, MOD9, INF = 10**9 + 7, 998244353, float("inf")
     RD = random.randint(MOD1, MOD1 << 1)
     Direction4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]     # ->, <-, v, ^
     Direction8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]     # ->, <-, v, ^, ↘, ↙, ↗, ↖
@@ -155,4 +181,3 @@ def helltractor():
 
 if __name__ == "__main__":
     helltractor()
-    
