@@ -66,7 +66,7 @@
 - [灵茶の试炼](https://docs.qq.com/sheet/DWGFoRGVZRmxNaXFz?tab=BB08J2&_t=1709176148789&u=2c8e1d24aa7b42bb9526f9bc765369cd)
 - [每日羊蹄](https://github.com/Yawn-Sean/Daily_CF_Problems)
 
-### LeetCodev
+### LeetCode
 
 - [滑动窗口（定长/不定长/多指针）](https://leetcode.cn/circle/discuss/0viNMK/)
 - [二分算法（二分答案/最小化最大值/最大化最小值/第 K 小）](https://leetcode.cn/circle/discuss/SqopEo/)

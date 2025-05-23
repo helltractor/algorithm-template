@@ -70,7 +70,7 @@ if InputType:
     LGMI = lambda: list(map(lambda x: int(x) - 1, input().split()))
 
 if ConstType:
-    MOD1, MOD9, INF = 10**9 + 7, 998244353, float("inf")
+    MOD1, MOD9 = 10**9 + 7, 998244353
     RD = random.randint(MOD1, MOD1 << 1)
     D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]  # ->, <-, v, ^
     D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]  # ->, <-, v, ^, ↘, ↙, ↗, ↖
