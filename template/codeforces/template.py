@@ -1,7 +1,8 @@
 ImportType = InputType = ConstType = 1
 DecoratorType = FunctinoType = 1
+
 if ImportType:
-    import sys, random
+    import os, sys, random
 
     # sys.exit() 退出程序
     # sys.setrecursionlimit(10**6) #调整栈空间
@@ -44,6 +45,51 @@ if ImportType:
     from decimal import Decimal, getcontext
 
 if InputType:
+    class FastIO(IOBase):
+        newlines = 0
+
+        def __init__(self, file):
+            self._fd = file.fileno()
+            self.buffer = BytesIO()
+            self.writable = "x" in file.mode or "r" not in file.mode
+            self.write = self.buffer.write if self.writable else None
+
+        def read(self):
+            while True:
+                b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
+                if not b:
+                    break
+                ptr = self.buffer.tell()
+                self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
+            self.newlines = 0
+            return self.buffer.read()
+
+        def readline(self):
+            while self.newlines == 0:
+                b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
+                self.newlines = b.count(b"\n") + (not b)
+                ptr = self.buffer.tell()
+                self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
+            self.newlines -= 1
+            return self.buffer.readline()
+
+        def flush(self):
+            if self.writable:
+                os.write(self._fd, self.buffer.getvalue())
+                self.buffer.truncate(0), self.buffer.seek(0)
+
+    class IOWrapper(IOBase):
+        def __init__(self, file):
+            self.buffer = FastIO(file)
+            self.flush = self.buffer.flush
+            self.writable = self.buffer.writable
+            self.write = lambda s: self.buffer.write(s.encode("ascii"))
+            self.read = lambda: self.buffer.read().decode("ascii")
+            self.readline = lambda: self.buffer.readline().decode("ascii")
+
+    BUFSIZE = 1 << 12
+    sys.stdin = IOWrapper(sys.stdin)
+    sys.stdout = IOWrapper(sys.stdout)
     input = lambda: sys.stdin.readline().rstrip("\r\n")
     I = lambda: input()
     II = lambda: int(input())
@@ -54,7 +100,6 @@ if InputType:
     LGMI = lambda: list(map(lambda x: int(x) - 1, input().split()))
 
 if DecoratorType:
-
     def bootstrap(f, stack=[]):
         def wrappedfunc(*args, **kwargs):
             if stack:
@@ -74,97 +119,9 @@ if DecoratorType:
 
         return wrappedfunc
 
-
 if FunctinoType:
-
-    class Math:
-        __slots__ = ["mod", "l", "fact", "inv"]
-
-        def __init__(self):
-            self.mod = mod = 10**9 + 7
-            self.l = l = 3 * 10**5 + 5
-            self.fact = fact = [1] * (l + 1)
-            self.inv = inv = [1] * (l + 1)
-            for i in range(1, l + 1):
-                fact[i] = fact[i - 1] * i % mod
-            inv[l] = pow(fact[l], mod - 2, mod)
-            for i in range(l - 1, -1, -1):
-                inv[i] = inv[i + 1] * (i + 1) % mod
-
-        def comb(self, n, r):
-            return (
-                self.fact[n] * self.inv[r] % self.mod * self.inv[n - r] % self.mod
-                if n >= r >= 0
-                else 0
-            )
-
-        def perm(self, n, r):
-            return self.fact[n] * self.inv[n - r] % self.mod if n >= r >= 0 else 0
-
-    class PrefixSum2D:
-        __slots__ = ["pre"]
-
-        def __init__(self, mat: List[List[int]]):
-            n, m = len(mat), len(mat[0])
-            self.pre = pre = [[0] * (m + 1) for _ in range(n + 1)]
-            for i, row in enumerate(mat):
-                for j, v in enumerate(row):
-                    pre[i + 1][j + 1] = pre[i][j + 1] + pre[i + 1][j] - pre[i][j] + v
-
-        def find(self, r1: int, c1: int, r2: int, c2: int) -> int:
-            """查询以(r1,c1)为左上角，(r2,c2)为右下角的矩形区间内所有值的和"""
-            return (
-                self.pre[r2 + 1][c2 + 1]
-                - self.pre[r2 + 1][c1]
-                - self.pre[r1][c2 + 1]
-                + self.pre[r1][c1]
-            )
-
-    class Difference2D:
-        __slots__ = ["m", "n", "diff"]
-
-        def __init__(self, m, n):
-            self.m = m
-            self.n = n
-            self.diff = [[0] * (n + 2) for _ in range(m + 2)]
-
-        def add(self, r1, c1, r2, c2, delta):
-            """下标从0开始，区间变化delta"""
-            diff = self.diff
-            diff[r1 + 1][c1 + 1] += delta
-            diff[r1 + 1][c2 + 2] -= delta
-            diff[r2 + 2][c1 + 1] -= delta
-            diff[r2 + 2][c2 + 2] += delta
-
-        def get(self):
-            diff = self.diff
-            for i in range(1, self.m + 1):
-                for j in range(1, self.n + 1):
-                    diff[i][j] += diff[i][j - 1] + diff[i - 1][j] - diff[i - 1][j - 1]
-            diff = diff[1:-1]
-            for i, row in enumerate(diff):
-                diff[i] = row[1:-1]
-            return diff
-
-    class BinaryIndexedTree:
-        __slots__ = ["n", "c"]
-
-        def __init__(self, n):
-            self.n = n
-            self.c = [0] * (n + 1)
-
-        def update(self, x: int, delta: int):
-            while x <= self.n:
-                self.c[x] += delta
-                x += x & -x
-
-        def query(self, x: int) -> int:
-            s = 0
-            while x > 0:
-                s += self.c[x]
-                x -= x & -x
-            return s
-
+    fmax = lambda x, y: x if x > y else y
+    fmin = lambda x, y: x if x < y else y
 
 if ConstType:
     MOD1, MOD9 = 10**9 + 7, 998244353

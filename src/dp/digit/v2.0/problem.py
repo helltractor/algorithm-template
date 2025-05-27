@@ -6,7 +6,7 @@ from functools import cache
 
 
 class Solution:
-    
+
     @staticmethod
     def lc_2999(self, start: int, finish: int, limit: int, s: str) -> int:
         """
@@ -15,7 +15,7 @@ class Solution:
         low = str(start)
         high = str(finish)
         n = len(high)
-        low = '0' * (n - len(low)) + low  # 补前导零，和 high 对齐
+        low = "0" * (n - len(low)) + low  # 补前导零，和 high 对齐
         diff = n - len(s)
 
         @cache
@@ -48,10 +48,12 @@ class Solution:
         low, high = str(low), str(high)
         n = len(high)
         diff = n - len(low)
-        low = '0' * diff + low
+        low = "0" * diff + low
 
         @cache
-        def dfs(i: int, cnt: int, mod: int, limit_low: bool, limit_high: bool, is_num: bool) -> int:
+        def dfs(
+            i: int, cnt: int, mod: int, limit_low: bool, limit_high: bool, is_num: bool
+        ) -> int:
             if i == n:
                 return cnt == mod == 0
             res = 0
@@ -64,9 +66,17 @@ class Solution:
             lo = int(low[i]) if limit_low else 0
             hi = int(high[i]) if limit_high else 9
 
-            for d in range(max(lo, 1 - is_num), hi + 1):  # 如果前面没有填数字，必须从 1 开始（因为不能有前导零）
-                res += dfs(i + 1, cnt + 1 - (d & 1) * 2, (mod * 10 + d) % k,
-                           limit_low and d == lo, limit_high and d == hi, True)
+            for d in range(
+                max(lo, 1 - is_num), hi + 1
+            ):  # 如果前面没有填数字，必须从 1 开始（因为不能有前导零）
+                res += dfs(
+                    i + 1,
+                    cnt + 1 - (d & 1) * 2,
+                    (mod * 10 + d) % k,
+                    limit_low and d == lo,
+                    limit_high and d == hi,
+                    True,
+                )
             return res
 
         return dfs(0, 0, 0, True, True, False)

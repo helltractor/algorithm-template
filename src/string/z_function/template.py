@@ -10,7 +10,7 @@ class ZFunction:
         self.s = s
         self.t = t
         self.z = self.computeZ()
-        
+
     @staticmethod
     def z_function(t: str) -> List[int]:
         z = [0] * len(t)
@@ -22,8 +22,8 @@ class ZFunction:
                 l, r = i, i + z[i]
                 z[i] += 1
         return z
-    
+
     def computeZ(self):
         s, t = self.s, self.t
-        z = self.z_function(t + '#' + s)
+        z = self.z_function(t + "#" + s)
         return [i for i in range(len(t) + 1, len(z)) if z[i] == len(t)]

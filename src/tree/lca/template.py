@@ -7,8 +7,8 @@ from typing import List
 
 
 class LowestCommonAncestor:
-    __slots__ = ['depth', 'pa']
-    
+    __slots__ = ["depth", "pa"]
+
     def __init__(self, edges: List[List[int]]) -> None:
         n = len(edges) + 1
         m = n.bit_length()
@@ -18,13 +18,14 @@ class LowestCommonAncestor:
         for x, y in edges:  # 节点编号从 0 开始
             g[x].append(y)
             g[y].append(x)
-            
+
         def dfs(x: int, fa: int) -> None:
             pa[x][0] = fa
             for y in g[x]:
                 if y != fa:
                     depth[y] = depth[x] + 1
                     dfs(y, x)
+
         dfs(0, -1)
 
         for i in range(m - 1):
@@ -51,9 +52,10 @@ class LowestCommonAncestor:
             if px != py:
                 x, y = px, py  # 同时上跳 2**i 步
         return self.pa[x][0]
-    
+
+
 class LcaWithWeight:
-    __slots__ = ['depth', 'dis', 'pa']
+    __slots__ = ["depth", "dis", "pa"]
 
     def __init__(self, edges: List[List[int]]) -> None:
         n = len(edges) + 1
@@ -73,7 +75,7 @@ class LcaWithWeight:
                     depth[y] = depth[x] + 1
                     dis[y] = dis[x] + w
                     dfs(y, x)
-                    
+
         dfs(0, -1)
 
         for i in range(m - 1):
@@ -87,7 +89,7 @@ class LcaWithWeight:
             if k >> i & 1:
                 node = self.pa[node][i]
         return node
-    
+
     def get_lca(self, x: int, y: int) -> int:
         """返回 x 和 y 的最近公共祖先（节点编号从 0 开始）"""
         if self.depth[x] > self.depth[y]:
@@ -100,8 +102,7 @@ class LcaWithWeight:
             if px != py:
                 x, y = px, py
         return self.pa[x][0]
-    
+
     def get_dis(self, x: int, y: int) -> int:
         """返回 x 和 y 之间的距离"""
         return self.dis[x] + self.dis[y] - self.dis[self.get_lca(x, y)] * 2
-        

@@ -11,7 +11,7 @@ from src.struct.sorted_list.template import SortedList
 
 
 class Dijkstra:
-    
+
     @staticmethod
     def get_shortest_path(dct, src, initial=0):
         """template of shortest path by dijkstra"""
@@ -32,7 +32,7 @@ class Dijkstra:
                     dis[j] = dj
                     heappush(stack, dj * n + j)
         return dis
-    
+
     @staticmethod
     def get_longest_path(dct, src, initial=0):
         """template of shortest path by dijkstra"""
@@ -51,7 +51,7 @@ class Dijkstra:
                     dis[j] = dj
                     heappush(stack, (dj, j))
         return [-x for x in dis]
-    
+
     @staticmethod
     def get_dijkstra_result_sorted_list(dct, src):
         n = len(dct)
@@ -70,7 +70,7 @@ class Dijkstra:
                     dis[j] = dj
                     lst.add((dj, j))
         return dis
-    
+
     @staticmethod
     def get_cnt_of_shortest_path(dct, src, mod=-1):
         """number of shortest path"""
@@ -97,7 +97,7 @@ class Dijkstra:
                     if mod != -1:
                         cnt[j] %= mod
         return cnt, dis
-    
+
     @staticmethod
     def get_dijkstra_result_limit(dct, src, limit, target):
         n = len(dct)
@@ -117,7 +117,7 @@ class Dijkstra:
                         dis[j] = dj
                         heappush(stack, (dj, j))
         return dis
-    
+
     @staticmethod
     def get_shortest_path_from_src_to_dst(dct, src, dst):
         n = len(dct)
@@ -146,7 +146,7 @@ class Dijkstra:
             path.append(i)
             i = father[i]
         return path, dis[dst]
-    
+
     @staticmethod
     def gen_maximum_product_path(dct, src, dsc):
         dis = defaultdict(lambda: inf)
@@ -163,7 +163,7 @@ class Dijkstra:
                     dis[j] = dj
                     heappush(stack, (-dj, j))
         return dis[dsc]
-    
+
     @staticmethod
     def get_second_shortest_path(dct, src):
         """template of strictly second shorter path"""
@@ -180,11 +180,13 @@ class Dijkstra:
                     dis[j][1] = dis[j][0]
                     dis[j][0] = d + w
                     heappush(stack, (d + w, j))
-                elif dis[j][0] < d + w < dis[j][1]:  # if not strictly then change to d+w < dis[j][1]
+                elif (
+                    dis[j][0] < d + w < dis[j][1]
+                ):  # if not strictly then change to d+w < dis[j][1]
                     dis[j][1] = d + w
                     heappush(stack, (d + w, j))
         return dis
-    
+
     @staticmethod
     def get_cnt_of_second_shortest_path(dct, src, mod=-1):
         """number of strictly second shorter path"""
@@ -209,7 +211,9 @@ class Dijkstra:
                     cnt[j][0] += pre
                     if mod != -1:
                         cnt[j][0] %= mod
-                elif dis[j][0] < dd < dis[j][1]:  # if not strictly then change to d+w < dis[j][1]
+                elif (
+                    dis[j][0] < dd < dis[j][1]
+                ):  # if not strictly then change to d+w < dis[j][1]
                     dis[j][1] = d + w
                     cnt[j][1] = pre
                     heappush(stack, (d + w, j, 1))
@@ -218,7 +222,7 @@ class Dijkstra:
                     if mod != -1:
                         cnt[j][1] %= mod
         return dis, cnt
-    
+
     @staticmethod
     def get_cnt_of_second_shortest_path_by_bfs(dct, src, mod=-1):
         """number of strictly second shorter path by bfs"""
@@ -248,10 +252,10 @@ class Dijkstra:
                     cnt[j * 2 + 1] += pre
                     cnt[j * 2 + 1] %= mod
         return dis, cnt
-    
+
     @staticmethod
     def get_shortest_path_by_bfs(dct, src, initial=-1):
-        """shortest path implemention by 01 bfs """
+        """shortest path implemention by 01 bfs"""
         n = len(dct)
         dis = [initial] * n
         stack = [src]
@@ -265,7 +269,7 @@ class Dijkstra:
                         nex.append(j)
             stack = nex
         return dis
-    
+
     @staticmethod
     def get_shortest_by_bfs_inf_odd(dct, src):
         """shortest odd path and even path"""
@@ -307,7 +311,7 @@ class UnDirectedShortestCycle:
                         cur = dist[x] + dist[child] + dct[x][child]
                         ans = ans if ans < cur else cur
         return ans if ans != inf else -1
-    
+
     @staticmethod
     def find_shortest_cycle_with_edge(n, dct, edges):
         # brute force by edge

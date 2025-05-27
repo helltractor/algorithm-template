@@ -4,9 +4,9 @@
 
 
 class Palindromic:
-    
+
     @staticmethod
-    def convert_by_string(mx: int = 10 ** 5) -> list[int]:
+    def convert_by_string(mx: int = 10**5) -> list[int]:
         """生成所有回文数（字符串转换）"""
         pal = []
         for i in range(1, mx):
@@ -15,9 +15,9 @@ class Palindromic:
             pal.append(int(s + s[::-1][1:]))
         pal.sort()
         return pal
-    
+
     @staticmethod
-    def convert_by_number(mx: int = 10 ** 5) -> list[int]:
+    def convert_by_number(mx: int = 10**5) -> list[int]:
         """按顺序从小到大生成所有回文数（不用字符串转换）"""
         pal = []
         base = 1

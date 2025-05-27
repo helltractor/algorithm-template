@@ -5,8 +5,9 @@
 from typing import List, Tuple
 from struct.segment_tree import SegmentTree
 
+
 class Solution:
-    
+
     @staticmethod
     def lc_3525(nums: List[int], k: int, queries: List[List[int]]) -> List[int]:
         """
@@ -14,8 +15,10 @@ class Solution:
         """
         n = len(nums)
         nums = [x % k for x in nums]
-    
-        def op(a: Tuple[int, List[int]], b: Tuple[int, List[int]]) -> Tuple[int, List[int]]:
+
+        def op(
+            a: Tuple[int, List[int]], b: Tuple[int, List[int]]
+        ) -> Tuple[int, List[int]]:
             cnt = a[1].copy()
             left_m = a[0]
             for m, c in enumerate(b[1]):
@@ -28,7 +31,7 @@ class Solution:
             res = [0] * k
             res[x] += 1
             v.append((x, res))
-            
+
         sg = SegmentTree(op, e, v)
         ans = []
         for i, v, s, x in queries:
@@ -38,4 +41,3 @@ class Solution:
             _, cnt = sg.prod(s, n)
             ans.append(cnt[x])
         return ans
-    

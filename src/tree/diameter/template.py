@@ -7,11 +7,12 @@ from typing import List
 
 
 class TreeDiameter:
-    
+
     @staticmethod
     def treeDiameterTopologicalSort(edges: List[List[int]]) -> int:
         n = len(edges) + 1
-        if n == 1: return 0
+        if n == 1:
+            return 0
         deg = [0] * (n + 1)
         mix = [0] * (n + 1)
         for u, v in edges:
@@ -19,7 +20,7 @@ class TreeDiameter:
             deg[v] += 1
             mix[u] ^= v
             mix[v] ^= u
-        
+
         queue = [i for i, u in enumerate(deg) if u == 1]
         radius = 0
         while len(queue) > 1:
@@ -28,7 +29,8 @@ class TreeDiameter:
                 v = mix[u]
                 mix[v] ^= u  # deg[v]=1时，mix[v]指向唯一邻居u
                 deg[v] -= 1
-                if deg[v] == 1: nextQueue.append(v)
+                if deg[v] == 1:
+                    nextQueue.append(v)
             radius += 1
             queue = nextQueue
         return (radius << 1) - (len(queue) ^ 1)

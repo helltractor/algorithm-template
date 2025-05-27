@@ -4,7 +4,7 @@
 
 
 class StringHash:
-    def __init__(self, s : str) -> None:
+    def __init__(self, s: str) -> None:
         """字符串哈希，用O(n)时间预处理，用O(1)时间获取段的哈希值"""
         self.n = n = len(s)
         self.BASE = BASE = 131313  # 进制 31,131,13131,13331,131313

@@ -2,14 +2,15 @@
 # -*- coding: utf-8 -*-
 # @Time : 2024/10/10 下午8:50
 
+
 class Manacher:
     def __init__(self, s: str) -> None:
         self.s = s
         self.halfLen = self.manacher(s)
-        
+
     @staticmethod
     def manacher(s: str) -> str:
-        t = '#'.join(f'^{s}$')
+        t = "#".join(f"^{s}$")
         n = len(t)
         halfLen = [0] * n
         mid = r = 0
@@ -21,4 +22,3 @@ class Manacher:
             if i + halfLen[i] > r:
                 mid, r = i, i + halfLen[i]
         return halfLen
-    

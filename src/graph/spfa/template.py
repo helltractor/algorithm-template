@@ -7,7 +7,7 @@ from collections import deque
 
 
 class SPFA:
-    
+
     @staticmethod
     def negative_circle_edge(dct, src=0, initial=0):
         """
@@ -40,7 +40,7 @@ class SPFA:
                         visit[v] = True
         # there is no negative loop starting from the starting point
         return False, dis, cnt
-    
+
     @staticmethod
     def positive_circle_edge(dct, src=0, initial=0):
         """
@@ -73,7 +73,7 @@ class SPFA:
                         visit[v] = True
         # there is no negative loop starting from the starting point
         return False, dis, cnt
-    
+
     @staticmethod
     def negative_circle_mul(dct, src=0, initial=0):
         """Determine if there is a ring with a product greater than 1"""
@@ -84,7 +84,7 @@ class SPFA:
         queue = deque([src])
         dis[src] = initial
         visit[src] = True
-        
+
         while queue:
             u = queue.popleft()
             visit[u] = False
@@ -98,7 +98,7 @@ class SPFA:
                         queue.append(v)
                         visit[v] = True
         return False, dis, cnt
-    
+
     @staticmethod
     def positive_circle_mul(dct, src=0, initial=1):
         """Determine if there is a ring with a product greater than 1"""
@@ -109,7 +109,7 @@ class SPFA:
         queue = deque([src])
         dis[src] = initial
         visit[src] = True
-        
+
         while queue:
             u = queue.popleft()
             visit[u] = False
@@ -123,4 +123,3 @@ class SPFA:
                         queue.append(v)
                         visit[v] = True
         return False, dis, cnt
-    

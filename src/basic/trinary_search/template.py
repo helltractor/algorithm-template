@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time: 2025-04-15 12:30:49
 
+
 class TrinarySearch:
 
     @staticmethod
@@ -20,7 +21,7 @@ class TrinarySearch:
             else:
                 l = ml + 1
                 r = mr - 1
-        res = l 
+        res = l
         for x in range(l - 5, r + 5):
             if ll <= x <= rr and f(x) > f(res):
                 res = x

@@ -7,14 +7,14 @@ from typing import List
 
 
 class Solution:
-    
+
     @staticmethod
     def lc_1713(target: List[int], arr: List[int]) -> int:
         """
         url: https://leetcode.cn/problems/minimum-operations-to-make-a-subsequence/
         desc: 无相同元素的LCS可以转化为LIS
         """
-        
+
         d = {x: i for i, x in enumerate(target)}
         li = []
         s = set(target)

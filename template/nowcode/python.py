@@ -12,7 +12,6 @@ if ImportType:
     from operator import add, iand, ior, itemgetter, mul, xor
 
 if InputType:
-
     class FastIO(IOBase):
         newlines = 0
 

@@ -4,8 +4,9 @@
 
 from functools import lru_cache
 
+
 class DigitDynamicProgramming:
-    
+
     def calculate(self, num: int) -> int:
         nums = list(map(int, str(num)))
 
@@ -22,7 +23,7 @@ class DigitDynamicProgramming:
                 if (mask >> d & 1) == 0:
                     res += dfs(i + 1, mask | (1 << d), is_limit and d == hi, True)
             return res
-        
+
         ans = dfs(0, 0, True, False)
         dfs.cache_clear()
         return ans

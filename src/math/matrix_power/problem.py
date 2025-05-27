@@ -8,6 +8,7 @@ from typing import List
 
 from math.matrix_power.template import MatrixPower
 
+
 class Solution:
 
     def lc_3337(self, s: str, t: int, nums: List[int]) -> int:
@@ -30,18 +31,20 @@ class Solution:
         """
         https://leetcode.cn/problems/painting-a-grid-with-three-different-colors/
         """
+
         def convert(base: int) -> str:
             res = [0] * m
             for i in range(m):
                 res[i] = base % 3
                 base //= 3
-            return ''.join(map(str, res[::-1]))
+            return "".join(map(str, res[::-1]))
 
         vaild = []
-        for c in range(3 ** m):
+        for c in range(3**m):
             c3 = convert(c)
             for x, y in pairwise(c3):
-                if x == y: break
+                if x == y:
+                    break
             else:
                 vaild.append(c3)
 
@@ -50,9 +53,10 @@ class Solution:
         for i, c1 in enumerate(vaild):
             for j, c2 in enumerate(vaild):
                 for x, y in zip(c1, c2):
-                    if x == y: break
+                    if x == y:
+                        break
                 else:
                     mat[i][j] = 1
-        
+
         ans = MatrixPower.matrix_power_numpy_list(mat, n - 1, [1] * nv)
         return sum(ans) % 1_000_000_007

@@ -20,4 +20,3 @@ class FenwickTree:
             s += self.c[x]
             x -= x & -x
         return s
-        

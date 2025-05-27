@@ -14,7 +14,6 @@ if ImportType:
     from sys import stdin, stdout, setrecursionlimit
 
 if InputType:
-
     class FastIO(IOBase):
         newlines = 0
 

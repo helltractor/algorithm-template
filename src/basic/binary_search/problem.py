@@ -6,9 +6,12 @@ from typing import List
 from collections import deque
 from bisect import bisect_left
 
+
 class Solution:
-    
-    def lc_2071(self, tasks: List[int], workers: List[int], pills: int, strength: int) -> int:
+
+    def lc_2071(
+        self, tasks: List[int], workers: List[int], pills: int, strength: int
+    ) -> int:
         """
         link: https://leetcode.cn/problems/maximum-number-of-tasks-you-can-assign/
         """
@@ -25,15 +28,15 @@ class Solution:
                     i += 1
                 if not q:
                     return False
-                if w >= q[0]:   # 不嗑药能完成的任务
+                if w >= q[0]:  # 不嗑药能完成的任务
                     q.popleft()
-                else:   # 嗑药能完成的最大任务
+                else:  # 嗑药能完成的最大任务
                     if p == 0:
                         return False
                     p -= 1
                     q.pop()
             return True
-        
+
         left = ans = 0
         right = min(n, m)
         while left <= right:
@@ -44,8 +47,10 @@ class Solution:
             else:
                 right = mid - 1
         return ans
-    
-    def lc_2071_bisect(self, tasks: List[int], workers: List[int], pills: int, strength: int) -> int:
+
+    def lc_2071_bisect(
+        self, tasks: List[int], workers: List[int], pills: int, strength: int
+    ) -> int:
         """
         link: https://leetcode.cn/problems/maximum-number-of-tasks-you-can-assign/
         """

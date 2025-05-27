@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time : 2025/4/15 上午11:03
 
+
 class LongestCommonSequence:
 
     @staticmethod
@@ -16,7 +17,7 @@ class LongestCommonSequence:
                 else:
                     dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
         return dp[n][m]
-    
+
     @staticmethod
     def get_lcs(s1: str, s2: str) -> str:
         n, m = len(s1), len(s2)
@@ -28,7 +29,7 @@ class LongestCommonSequence:
                     dp[i][j] = dp[i - 1][j - 1] + 1
                 else:
                     dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
-    
+
         i, j = n, m
         lcs_str = []
         while i > 0 and j > 0:
@@ -40,6 +41,5 @@ class LongestCommonSequence:
                 i -= 1
             else:
                 j -= 1
-        
-        return ''.join(reversed(lcs_str))
-    
+
+        return "".join(reversed(lcs_str))

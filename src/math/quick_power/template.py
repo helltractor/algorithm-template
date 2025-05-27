@@ -6,8 +6,9 @@
 from math import log2, sqrt
 from typing import Tuple
 
+
 class FastPower:
-    
+
     def _quick_power(self, x: int, y: int, mod: int = 1_000_000_007) -> float:
         ans = 1.0
         while y:
@@ -16,23 +17,23 @@ class FastPower:
             x = x * x % mod
             y //= 2
         return ans
-    
+
     def pow(self, x: float, n: int) -> float:
         return self._quick_power(x, n) if n >= 0 else 1.0 / self._quick_power(x, -n)
-    
+
     def pow_rec(self, x: int, n: int, mod: int = 31) -> float:
         if n == 0:
             return 1.0
         ans = self.quick_power_rec(x, n // 2) % mod
         return ans * ans % mod if n % 2 == 0 else ans * ans * x % mod
-    
+
     def pow_sum(self, x: int, n: int, mod: int = 1_000_000_007) -> Tuple[int, int]:
         """计算 x^n, x^(n-1) + ... + x^0 模 mod"""
         if mod == 1:
             return 0, 0
         sum_, p = 1, x
         start = int(log2(n)) - 1
-        
+
         for d in range(start, -1, -1):
             sum_ = sum_ * (p + 1) % mod
             p = p * p % mod
@@ -41,9 +42,10 @@ class FastPower:
                 p = p * x % mod
         return p, sum_
 
+
 class BlockFastPower:
-    __slots__ = '_max', '_mod', '_div_pow', '_mod_pow'
-    
+    __slots__ = "_max", "_mod", "_div_pow", "_mod_pow"
+
     def __init__(self, base: int, n: int, mod: int = 1_000_000_007) -> None:
         self._max = max_ = int(sqrt(n)) + 1
         self._mod = mod
@@ -61,6 +63,5 @@ class BlockFastPower:
 
     def pow(self, n: int) -> int:
         assert n <= self._max * self._max
-        
+
         return self._div_pow[n // self._max] * self._mod_pow[n % self._max] % self._mod
-    

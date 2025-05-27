@@ -5,6 +5,7 @@
 from typing import List
 from src.tree.lca.template import LcaWithWeight
 
+
 class Solution:
 
     def lc_3553(self, edges: List[List[int]], queries: List[List[int]]) -> List[int]:
