@@ -27,7 +27,7 @@
 
 #### Tree
 
-- [CF436F]()
+- [CF436F](https://codeforces.com/contest/436/problem/F)
 
 ### Dynamic Programming
 
@@ -89,7 +89,3 @@
 #### Recall
 
 - [CF1689C](https://codeforces.com/contest/1689/problem/C) | [plus P1041](https://www.luogu.com.cn/problem/P1041): DFS and recall
-
-### String
-
-### Waiting to classify
