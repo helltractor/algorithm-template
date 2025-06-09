@@ -19,14 +19,14 @@ class LowestCommonAncestor:
             g[x].append(y)
             g[y].append(x)
 
-        def dfs(x: int, fa: int) -> None:
-            pa[x][0] = fa
-            for y in g[x]:
-                if y != fa:
-                    depth[y] = depth[x] + 1
-                    dfs(y, x)
-
-        dfs(0, -1)
+        q = [0]
+        for u in q:
+            for v in g[u]:
+                if pa[u][0] == v:
+                    continue
+                pa[v][0] = u
+                depth[v] = depth[u] + 1
+                q.append(v)
 
         for i in range(m - 1):
             for x in range(n):
@@ -68,15 +68,14 @@ class LcaWithWeight:
             g[x].append((y, w))
             g[y].append((x, w))
 
-        def dfs(x: int, fa: int) -> None:
-            pa[x][0] = fa
-            for y, w in g[x]:
-                if y != fa:
-                    depth[y] = depth[x] + 1
-                    dis[y] = dis[x] + w
-                    dfs(y, x)
-
-        dfs(0, -1)
+        q = [0]
+        for u in q:
+            for v in g[u]:
+                if pa[u][0] == v:
+                    continue
+                pa[v][0] = u
+                depth[v] = depth[u] + 1
+                q.append(v)
 
         for i in range(m - 1):
             for x in range(n):
