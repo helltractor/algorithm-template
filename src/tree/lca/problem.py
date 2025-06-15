@@ -1,20 +1,37 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time : 2025年5月18日 15点19分
+# @Time: 2025年5月18日 15点19分
 
 from typing import List
-from template.codeforces.template import II, LGMI, MOD1
+from util.io.fast_io import II, LGMI, MOD1
 from src.tree.lca.template import LcaWithWeight, LowestCommonAncestor
 
 
 class Solution:
 
     def lc_3553(self, edges: List[List[int]], queries: List[List[int]]) -> List[int]:
-        lca = LcaWithWeight(edges)
+        g = LcaWithWeight(edges)
         return [
-            (lca.get_dis(a, b) + lca.get_dis(b, c) + lca.get_dis(a, c)) // 2
+            (g.get_dis(a, b) + g.get_dis(b, c) + g.get_dis(a, c)) // 2
             for a, b, c in queries
         ]
+
+    def lc_3585(self, edges: List[List[int]], queries: List[List[int]]) -> List[int]:
+        g = LcaWithWeight(edges)
+        ans = [0] * len(queries)
+        for i, (u, v) in enumerate(queries):
+            if u == v:
+                ans[i] = u
+                continue
+            lca = g.get_lca(u, v)
+            dis_uv = g.dis[u] + g.dis[v] - 2 * g.dis[lca]
+            half = (dis_uv + 1) // 2
+            if g.dis[u] - g.dis[lca] < half:
+                ans[i] = g.upto_dis(v, dis_uv - half)
+            else:
+                to = g.upto_dis(u, half - 1)
+                ans[i] = g.pa[to][0]
+        return ans
 
     def cf_2117f():
         for _ in range(II()):
@@ -33,13 +50,15 @@ class Solution:
             elif len(leaf) == 1:
                 print(pow(2, n, MOD1))
             else:
-                lca = LowestCommonAncestor(e)
+                g = LowestCommonAncestor(e)
                 x, y = leaf
-                lca_xy = lca.get_lca(x, y)
-                diff_x = lca.depth[x] - lca.depth[lca_xy]
-                diff_y = lca.depth[y] - lca.depth[lca_xy]
+                lca_xy = g.get_lca(x, y)
+                diff_x = g.depth[x] - g.depth[lca_xy]
+                diff_y = g.depth[y] - g.depth[lca_xy]
                 if diff_x == diff_y:
-                    print(pow(2, lca.depth[lca_xy] + 2, MOD1))
+                    print(pow(2, g.depth[lca_xy] + 2, MOD1))
                 else:
-                    print(3 * pow(2, lca.depth[lca_xy] + abs(diff_x - diff_y), MOD1) % MOD1)
+                    print(
+                        3 * pow(2, g.depth[lca_xy] + abs(diff_x - diff_y), MOD1) % MOD1
+                    )
         return

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time : 2024/1/14 12:12
+# @Time: 2024/1/14 12:12
 
 
 class KMP:

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time : 2024/09/18 上午11:31
-# @Link : https://leetcode.cn/problems/find-minimum-diameter-after-merging-two-trees/solutions/2827577/xiang-jie-bo-yang-cong-da-fa-hao-by-l00-yp6l/
+# @Time: 2024/09/18 上午11:31
+# @link: https://leetcode.cn/problems/find-minimum-diameter-after-merging-two-trees/solutions/2827577/xiang-jie-bo-yang-cong-da-fa-hao-by-l00-yp6l/
 
 from typing import List
 
@@ -26,7 +26,7 @@ class TreeDiameter:
                 diameter = max(diameter, max_len + sub_len)
                 max_len = max(max_len, sub_len)
             return max_len
-        
+
         diameter = 0
         dfs(0, -1)
         return diameter
@@ -48,7 +48,7 @@ class TreeDiameter:
             nq = []
             for u in q:
                 v = mix[u]  # deg[v]=1时，mix[v]指向唯一邻居u
-                mix[v] ^= u 
+                mix[v] ^= u
                 deg[v] -= 1
                 if deg[v] == 1:
                     nq.append(v)

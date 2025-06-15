@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time : 2025年5月5日 13点15分
+# @Time: 2025年5月5日 13点15分
 
 import unittest
 from src.math.quick_power.template import FastPower, BlockFastPower

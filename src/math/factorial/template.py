@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time : 2024/9/23 下午4:02
+# @Time: 2024/9/23 下午4:02
 
 
 class Factorial:

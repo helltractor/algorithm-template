@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time : 2024/4/30 21:09
+# @Time: 2024/4/30 21:09
 
 import os
 import sys
@@ -54,3 +54,11 @@ class IOWrapper(IOBase):
 BUFSIZE = 4096
 sys.stdin = IOWrapper(sys.stdin)
 sys.stdout = IOWrapper(sys.stdout)
+
+I = lambda: input()
+II = lambda: int(input())
+MII = lambda: map(int, input().split())
+LI = lambda: list(input())
+LII = lambda: list(map(int, input().split()))
+GMI = lambda: map(lambda x: int(x) - 1, input().split())
+LGMI = lambda: list(map(lambda x: int(x) - 1, input().split()))

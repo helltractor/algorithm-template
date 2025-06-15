@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time : 2023/11/30 19:57
-# @Link : https://github.com/981377660LMT/algorithm-study/blob/master/19_%E6%95%B0%E5%AD%A6/%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97/%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82/%E5%85%89%E9%80%9F%E5%B9%82.py
+# @Time: 2023/11/30 19:57
 
 from math import log2, sqrt
 from typing import Tuple
@@ -43,6 +42,8 @@ class FastPower:
         return p, sum_
 
 
+# %%
+# @link: https://github.com/981377660LMT/algorithm-study/blob/master/19_%E6%95%B0%E5%AD%A6/%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97/%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82/%E5%85%89%E9%80%9F%E5%B9%82.py
 class BlockFastPower:
     __slots__ = "_max", "_mod", "_div_pow", "_mod_pow"
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time : 2024/3/11 15:50
+# @Time: 2024/3/11 15:50
 
 
 class StringHash:

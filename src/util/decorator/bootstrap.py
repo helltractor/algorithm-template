@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time : 2024/3/28 15:00
+# @Time: 2024/3/28 15:00
 
 from types import GeneratorType
 

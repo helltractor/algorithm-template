@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time : 2024/7/15 下午2:20
+# @Time: 2024/7/15 下午2:20
 
 
 class UnionFind:

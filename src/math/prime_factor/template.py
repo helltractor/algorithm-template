@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time : 2024/8/2 下午2:56
+# @Time: 2024/8/2 下午2:56
 
 from collections import Counter
 from typing import List
