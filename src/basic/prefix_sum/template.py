@@ -20,6 +20,8 @@ class PrefixSum2D:
         """查询以(r1,c1)为左上角，(r2,c2)为右下角的矩形区间内所有值的和"""
         return self.pre[r2 + 1][c2 + 1] - self.pre[r2 + 1][c1] - self.pre[r1][c2 + 1] + self.pre[r1][c1]
 
+
+#%%
 class PrefixSum3D:
     __slots__ = ["m", "n", "o", "pre"]
     

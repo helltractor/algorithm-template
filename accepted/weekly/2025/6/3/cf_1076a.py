@@ -18,7 +18,6 @@ if ImportType:
     from sys import stdin, stdout, setrecursionlimit
 
 if InputType:
-
     class FastIO(IOBase):
         newlines = 0
 
@@ -74,11 +73,9 @@ if InputType:
     LGMI = lambda: list(map(lambda x: int(x) - 1, input().split()))
 
 if DecoratorType:
-
     def bootstrap(f, stack=[]):
         def wrappedfunc(*args, **kwargs):
-            if stack:
-                return f(*args, **kwargs)
+            if stack: return f(*args, **kwargs)
             else:
                 to = f(*args, **kwargs)
                 while True:
@@ -87,53 +84,50 @@ if DecoratorType:
                         to = next(to)
                     else:
                         stack.pop()
-                        if not stack:
-                            break
+                        if not stack: break
                         to = stack[-1].send(to)
                 return to
-
         return wrappedfunc
-
 
 if FunctinoType:
     fmax = lambda x, y: x if x > y else y
     fmin = lambda x, y: x if x < y else y
 
 if ConstType:
-    MOD1, MOD9 = 10**9 + 7, 998244353
+    MOD1, MOD9 = 1000000007, 998244353
     RD = random.randint(MOD1, MOD1 << 1)
-    Direction4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]  # ->, <-, v, ^
+    Direction4 = [(0, 1), (0, -1), (1, 0), (-1, 0)] # ->, <-, v, ^
     Direction8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)] # ->, <-, v, ^, ↘, ↙, ↗, ↖
     Y, N = "Yes", "No"
     A, B = "Alice", "Bob"
 
 
 def helltractor():
-    for _ in range(II()):
-        n, k = MII()
-        p = LII()
-        d = LII()
-        q = II()
-        a = LII()
+    n = II()
+    s = list(I())
+    for i, c in enumerate(s[: -1]):
+        if c > s[i + 1]:
+            s = s[: i] + s[i+1:]
+            break
+    if len(s) == n:
+        s = s[: -1]
+    print(''.join(s))
 
-        for i, x in enumerate(a):
-            j = bisect_left(p, x)
-            t = 0
-            dx = 1
-            cnt = [0] * n
-            flag = True
-            while 0 <= j < n and flag:
-                dis = p[j] - x
-                x += dis
-                t += abs(dis)
-                if t % k == d[j]:
-                    dx *= -1
-                    cnt[j] += 1
-                if cnt[j] > 2:
-                    flag = False
-                j += dx
-            print(Y if flag else N)
+
+def helltractor_plus():
+    n = II()
+    s = list(I())
+    k = 1
+    st = []
+    for i, c in enumerate(s):
+        while st and st[-1] > c and k > 0:
+            st.pop()
+            k -= 1
+        st.append(c)
+    if k > 0:
+        st = st[:-k]
+    print(''.join(st))
 
 
 if __name__ == "__main__":
-    helltractor()
+    helltractor_plus()

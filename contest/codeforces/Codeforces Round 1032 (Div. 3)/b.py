@@ -100,7 +100,7 @@ if FunctinoType:
     fmin = lambda x, y: x if x < y else y
 
 if ConstType:
-    MOD1, MOD9 = 10**9 + 7, 998244353
+    MOD1, MOD9 = 1000000007, 998244353
     RD = random.randint(MOD1, MOD1 << 1)
     Direction4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]  # ->, <-, v, ^
     Direction8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)] # ->, <-, v, ^, ↘, ↙, ↗, ↖
@@ -110,29 +110,22 @@ if ConstType:
 
 def helltractor():
     for _ in range(II()):
-        n, k = MII()
-        p = LII()
-        d = LII()
-        q = II()
-        a = LII()
+        n = II()
+        s = I()
 
-        for i, x in enumerate(a):
-            j = bisect_left(p, x)
-            t = 0
-            dx = 1
-            cnt = [0] * n
-            flag = True
-            while 0 <= j < n and flag:
-                dis = p[j] - x
-                x += dis
-                t += abs(dis)
-                if t % k == d[j]:
-                    dx *= -1
-                    cnt[j] += 1
-                if cnt[j] > 2:
-                    flag = False
-                j += dx
-            print(Y if flag else N)
+        cnt = [0] * 26
+        for i in range(1, len(s) - 1):
+            cnt[ord(s[i]) - ord("a")] += 1
+
+        flag = False
+        for i, x in enumerate(cnt):
+            if x > 1 or (
+                x == 1 and (ord(s[0]) - ord("a") == i or ord(s[-1]) - ord("a") == i)
+            ):
+                flag = True
+                break
+
+        print(Y if flag else N)
 
 
 if __name__ == "__main__":

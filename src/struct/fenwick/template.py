@@ -20,3 +20,6 @@ class FenwickTree:
             s += self.c[x]
             x -= x & -x
         return s
+    
+    def range_query(self, l: int, r: int) -> int:
+        return self.query(r) - self.query(l - 1)

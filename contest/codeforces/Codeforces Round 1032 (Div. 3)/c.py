@@ -100,7 +100,7 @@ if FunctinoType:
     fmin = lambda x, y: x if x < y else y
 
 if ConstType:
-    MOD1, MOD9 = 10**9 + 7, 998244353
+    MOD1, MOD9 = 1000000007, 998244353
     RD = random.randint(MOD1, MOD1 << 1)
     Direction4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]  # ->, <-, v, ^
     Direction8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)] # ->, <-, v, ^, ↘, ↙, ↗, ↖
@@ -110,29 +110,30 @@ if ConstType:
 
 def helltractor():
     for _ in range(II()):
-        n, k = MII()
-        p = LII()
-        d = LII()
-        q = II()
-        a = LII()
+        n, m = MII()
+        g = [LII() for _ in range(n)]
 
-        for i, x in enumerate(a):
-            j = bisect_left(p, x)
-            t = 0
-            dx = 1
-            cnt = [0] * n
-            flag = True
-            while 0 <= j < n and flag:
-                dis = p[j] - x
-                x += dis
-                t += abs(dis)
-                if t % k == d[j]:
-                    dx *= -1
-                    cnt[j] += 1
-                if cnt[j] > 2:
-                    flag = False
-                j += dx
-            print(Y if flag else N)
+        mx = 0
+        cnt = 0
+        row = [[0] * 101 for _ in range(n)]
+        col = [[0] * 101 for _ in range(m)]
+        for i, r in enumerate(g):
+            for j, v in enumerate(r):
+                mx = fmax(mx, v)
+                row[i][v] += 1
+        for j in range(m):
+            for i in range(n):
+                v = g[i][j]
+                col[j][v] += 1
+                if v == mx:
+                    cnt += 1
+
+        flag = False
+        for i, r in enumerate(g):
+            for j, v in enumerate(r):
+                if row[i][mx] + col[j][mx] - int(v == mx) == cnt:
+                    flag = True
+        print(mx - int(flag))
 
 
 if __name__ == "__main__":

@@ -100,7 +100,7 @@ if FunctinoType:
     fmin = lambda x, y: x if x < y else y
 
 if ConstType:
-    MOD1, MOD9 = 10**9 + 7, 998244353
+    MOD1, MOD9 = 1000000007, 998244353
     RD = random.randint(MOD1, MOD1 << 1)
     Direction4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]  # ->, <-, v, ^
     Direction8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)] # ->, <-, v, ^, ↘, ↙, ↗, ↖
@@ -110,29 +110,32 @@ if ConstType:
 
 def helltractor():
     for _ in range(II()):
-        n, k = MII()
-        p = LII()
-        d = LII()
-        q = II()
+        n = II()
         a = LII()
+        b = LII()
 
-        for i, x in enumerate(a):
-            j = bisect_left(p, x)
-            t = 0
-            dx = 1
-            cnt = [0] * n
-            flag = True
-            while 0 <= j < n and flag:
-                dis = p[j] - x
-                x += dis
-                t += abs(dis)
-                if t % k == d[j]:
-                    dx *= -1
-                    cnt[j] += 1
-                if cnt[j] > 2:
-                    flag = False
-                j += dx
-            print(Y if flag else N)
+        c = [a, b]
+        ans = []
+        for i in range(1, 2 * n + 1):
+            x = y = 0
+            for j in range(n):
+                if c[0][j] == i or c[1][j] == i:
+                    x = 0 if c[0][j] == i else 1
+                    y = j
+                    break
+            if i % 2 == 1 - x and 2 * y + x + 1 == i:
+                continue
+            if i % 2 != 1 - x:
+                x = 1 - x
+                ans.append((3, y + 1))
+                c[x][y], c[1 - x][y] = c[1 - x][y], c[x][y]
+            for j in range(y - 1, (i - 1) // 2 - 1, -1):
+                ans.append((x + 1, j + 1))
+                c[x][j], c[x][j + 1] = c[x][j + 1], c[x][j]
+
+        print(len(ans))
+        for x, y in ans:
+            print(x, y)
 
 
 if __name__ == "__main__":

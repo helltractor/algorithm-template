@@ -18,7 +18,6 @@ if ImportType:
     from sys import stdin, stdout, setrecursionlimit
 
 if InputType:
-
     class FastIO(IOBase):
         newlines = 0
 
@@ -74,11 +73,9 @@ if InputType:
     LGMI = lambda: list(map(lambda x: int(x) - 1, input().split()))
 
 if DecoratorType:
-
     def bootstrap(f, stack=[]):
         def wrappedfunc(*args, **kwargs):
-            if stack:
-                return f(*args, **kwargs)
+            if stack: return f(*args, **kwargs)
             else:
                 to = f(*args, **kwargs)
                 while True:
@@ -87,52 +84,51 @@ if DecoratorType:
                         to = next(to)
                     else:
                         stack.pop()
-                        if not stack:
-                            break
+                        if not stack: break
                         to = stack[-1].send(to)
                 return to
-
         return wrappedfunc
-
 
 if FunctinoType:
     fmax = lambda x, y: x if x > y else y
     fmin = lambda x, y: x if x < y else y
 
 if ConstType:
-    MOD1, MOD9 = 10**9 + 7, 998244353
+    MOD1, MOD9 = 1000000007, 998244353
     RD = random.randint(MOD1, MOD1 << 1)
-    Direction4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]  # ->, <-, v, ^
+    Direction4 = [(0, 1), (0, -1), (1, 0), (-1, 0)] # ->, <-, v, ^
     Direction8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)] # ->, <-, v, ^, ↘, ↙, ↗, ↖
     Y, N = "Yes", "No"
     A, B = "Alice", "Bob"
 
 
+
 def helltractor():
     for _ in range(II()):
-        n, k = MII()
-        p = LII()
-        d = LII()
-        q = II()
-        a = LII()
+        low, high = I().split()
+        low = list(map(int, low.zfill(len(high))))
+        high = list(map(int, high))
+        diff = len(high) - len(low)
 
-        for i, x in enumerate(a):
-            j = bisect_left(p, x)
-            t = 0
-            dx = 1
-            cnt = [0] * n
-            flag = True
-            while 0 <= j < n and flag:
-                dis = p[j] - x
-                x += dis
-                t += abs(dis)
-                if t % k == d[j]:
-                    dx *= -1
-                    cnt[j] += 1
-                if cnt[j] > 2:
-                    flag = False
-                j += dx
-            print(Y if flag else N)
+        @lru_cache(None)
+        def dfs(i: int, limit_low: bool, limit_high: bool, is_num: bool) -> int:
+            if i == len(high):
+                return 0
+            res = inf
+
+            if i < diff and not is_num:
+                res += dfs(i + 1, True, False, False)
+
+            lo = low[i] if limit_low else 0
+            hi = high[i] if limit_high else 9
+
+            for d in range(max(lo, 1 - is_num), hi + 1):
+                res = min(res, dfs(i + 1, limit_low and d == lo, limit_high and d == hi, True) + int(d == low[i]) + int(d == high[i]))
+            return res
+
+        ans = dfs(0, True, True, False)
+        dfs.cache_clear()
+        print(ans)
 
 
 if __name__ == "__main__":

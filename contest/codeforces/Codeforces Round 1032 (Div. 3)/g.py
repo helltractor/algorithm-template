@@ -100,7 +100,7 @@ if FunctinoType:
     fmin = lambda x, y: x if x < y else y
 
 if ConstType:
-    MOD1, MOD9 = 10**9 + 7, 998244353
+    MOD1, MOD9 = 1000000007, 998244353
     RD = random.randint(MOD1, MOD1 << 1)
     Direction4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]  # ->, <-, v, ^
     Direction8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)] # ->, <-, v, ^, ↘, ↙, ↗, ↖
@@ -108,32 +108,72 @@ if ConstType:
     A, B = "Alice", "Bob"
 
 
+class FenwickTree:
+    __slots__ = ["n", "c"]
+
+    def __init__(self, n: int) -> None:
+        self.n = n
+        self.c = [0] * (n + 1)
+
+    def update(self, x: int, delta: int) -> None:
+        while x <= self.n:
+            self.c[x] += delta
+            x += x & -x
+
+    def query(self, x: int) -> int:
+        s = 0
+        while x > 0:
+            s += self.c[x]
+            x -= x & -x
+        return s
+
+    def range_query(self, l: int, r: int) -> int:
+        return self.query(r) - self.query(l - 1)
+
+
 def helltractor():
     for _ in range(II()):
-        n, k = MII()
-        p = LII()
-        d = LII()
-        q = II()
-        a = LII()
+        n = II()
+        a = LI()
 
-        for i, x in enumerate(a):
-            j = bisect_left(p, x)
-            t = 0
-            dx = 1
-            cnt = [0] * n
-            flag = True
-            while 0 <= j < n and flag:
-                dis = p[j] - x
-                x += dis
-                t += abs(dis)
-                if t % k == d[j]:
-                    dx *= -1
-                    cnt[j] += 1
-                if cnt[j] > 2:
-                    flag = False
-                j += dx
-            print(Y if flag else N)
+        pre = list(
+            accumulate(a, lambda acc, x: acc + (1 if x == "1" else -1), initial=0)
+        )
+        ans = (n + 1) * (n + 2) * n // 6
+        # for i in range(1, n + 1):
+        #     ans += i * (n - i + 1)
+        pre.sort()
+        for i, x in enumerate(pre):
+            ans += x * (i - (n - i))
+        print(ans // 2)
+
+
+def helltractor_fenwick():
+    for _ in range(II()):
+        n = II()
+        a = LI()
+
+        size = 2 * n + 1
+        offset = n
+        f = FenwickTree(size)
+
+        zero = offset
+        ans = 0
+        s = 0
+        for c in a:
+            s += 1
+            if c == "0":
+                s += f.range_query(zero, size - 1)
+                f.update(zero, 1)
+                zero -= 1
+            else:
+                s += f.range_query(0, zero)
+                f.update(zero, 1)
+                zero += 1
+            ans += s
+        print(ans)
 
 
 if __name__ == "__main__":
-    helltractor()
+    # helltractor()
+    helltractor_fenwick()
