@@ -5,7 +5,7 @@
 import typing
 
 
-class SegTree:
+class SegmentTree:
     __slots__ = ["_op", "_e", "_n", "_log", "_size", "_d"]
     
     def __init__(self,
