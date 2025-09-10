@@ -13,7 +13,7 @@ class DigitDynamicProgramming:
         @lru_cache(None)
         def dfs(i: int, mask: int, is_limit: bool, is_num: bool) -> int:
             if i == len(nums):
-                return is_num
+                return int(is_num)
             res = 0
             if not is_num:
                 res = dfs(i + 1, mask, False, False)
