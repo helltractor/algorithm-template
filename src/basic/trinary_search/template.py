@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2025-04-15 12:30:49
 
 
 class TrinarySearch:

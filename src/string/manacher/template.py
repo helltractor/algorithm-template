@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2024/10/10 下午8:50
 
 
 class Manacher:

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2023/12/14 13:13
 
 from typing import List
 
@@ -21,7 +20,6 @@ class PrefixSum2D:
         return self.pre[r2 + 1][c2 + 1] - self.pre[r2 + 1][c1] - self.pre[r1][c2 + 1] + self.pre[r1][c1]
 
 
-#%%
 class PrefixSum3D:
     __slots__ = ["m", "n", "o", "pre"]
     

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2023/12/10 21:42
 
 
 class Trie:
@@ -59,7 +58,6 @@ class Trie:
         self._delete(self, word, 0)
 
 
-# %%
 class ZeroOneTrie:
     __slots__ = ["son", "cnt"]
     HIGH_BIT = 30

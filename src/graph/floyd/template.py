@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2025年6月15日 01点00分
 
 from typing import List, Tuple
 

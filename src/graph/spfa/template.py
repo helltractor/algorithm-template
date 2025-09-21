@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2024/9/14 下午12:29
+# @Author: liupengsay
+# @Link: https://github.com/liupengsay/PyIsTheBestLang/blob/main/src/graph/spfa/template.py
 
 from math import inf
 from collections import deque

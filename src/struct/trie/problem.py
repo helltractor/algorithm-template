@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2025年6月13日 17点29分
 
 from functools import cache
 from struct.trie.template import Trie, ZeroOneTrie

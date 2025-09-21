@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2024/09/18 上午11:31
 # @link: https://leetcode.cn/problems/find-minimum-diameter-after-merging-two-trees/solutions/2827577/xiang-jie-bo-yang-cong-da-fa-hao-by-l00-yp6l/
 
 from typing import List

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2024/7/15 下午2:21
 
 if __name__ == "__main__":
     n = int(input())

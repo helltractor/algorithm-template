@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2024/8/7 上午1:46
 
 
 class BinarySearch:

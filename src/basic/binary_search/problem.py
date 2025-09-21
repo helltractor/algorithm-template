@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2025年5月1日 01点48分
 
 from typing import List
 from collections import deque

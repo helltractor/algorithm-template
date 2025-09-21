@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2025年5月13日 11点39分
 
 from collections import Counter
 from itertools import pairwise

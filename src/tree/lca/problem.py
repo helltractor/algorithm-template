@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2025年5月18日 15点19分
 
 from typing import List
 from util.io.fast_io import II, LGMI, MOD1
