@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Author : liupengsay
+# @Author: liupengsay
+# @Link: https://github.com/liupengsay/PyIsTheBestLang/blob/main/src/graph/dijkstra/template.py
 
 from collections import defaultdict, deque
 from heapq import heappush, heappop
