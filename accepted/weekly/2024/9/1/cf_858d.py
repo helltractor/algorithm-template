@@ -69,8 +69,8 @@ GMI = lambda: map(lambda x: int(x) - 1, input().split())
 LGMI = lambda: list(map(lambda x: int(x) - 1, input().split()))
 MOD1, MOD9 = 10 ** 9 + 7, 998244353
 RD = random.randint(MOD1, MOD1 << 1)
-Direction4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]  # ->, <-, v, ^
-Direction8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]  # ->, <-, v, ^, ↘, ↙, ↗, ↖
+D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)] 
+D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)] 
 Y, N, A, B = "Yes", "No", "Alice", "Bob"
 
 
