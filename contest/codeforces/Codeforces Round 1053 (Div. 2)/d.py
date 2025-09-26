@@ -1,48 +1,24 @@
+from math import comb
+
+
 ImportType = InputType = ConstType = 1
 DecoratorType = FunctinoType = 1
-
 if ImportType:
-    import os, sys, random
-
-    # sys.exit() 退出程序
-    # sys.setrecursionlimit(10**6) #调整栈空间
-    from sys import stdin, stdout, setrecursionlimit
-
-    # randint(a,b)从[a,b]范围随机选择一个数
-    # choice(seq)seq可以是一个列表,元组或字符串,从seq中随机选取一个元素
-    # shuffle(x)将一个可变的序列x中的元素打乱
+    import os, sys, random, threading
     from random import randint, choice, shuffle
-
     from copy import deepcopy
     from io import BytesIO, IOBase
     from types import GeneratorType
-
-    # reduce(op, 迭代对象)
     from functools import lru_cache, reduce
-
-    # bisect_left(x) 大于等于x的第一个下标
-    # bisect_right(x) 大于x的第一个下标
     from bisect import bisect_left, bisect_right
     from collections import Counter, defaultdict, deque
-
-    # accumulate(a) 用a序列生成一个累积迭代器，一般list化前面放个[0]做前缀和用
-    # combinations(a,k) a序列选k个组合迭代器
-    # permutations(a,k) a序列选k个排列迭代器
     from itertools import accumulate, combinations, permutations
-
-    # heapify将列表转为堆
     from heapq import heapify, heappop, heappush
     from typing import Generic, Iterable, Iterator, TypeVar, Union, List
-
-    # 小写字母，大写字母，十进制数字
     from string import ascii_lowercase, ascii_uppercase, digits
-
-    # ceil向上取整，floor向下取整，sqrt开方，factorial阶乘
     from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf
-
-    # Decimal(s) 实例化Decimal对象,一般使用字符串
-    # getcontext().prec=100 修改精度
     from decimal import Decimal, getcontext
+    from sys import stdin, stdout, setrecursionlimit
 
 if InputType:
 
@@ -127,7 +103,7 @@ if FunctinoType:
     fmin = lambda x, y: x if x < y else y
 
 if ConstType:
-    MOD1, MOD9 = 10**9 + 7, 998244353
+    MOD1, MOD9 = 1000000007, 998244353
     RD = random.randint(MOD1, MOD1 << 1)
     D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]
     D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
@@ -135,8 +111,67 @@ if ConstType:
     A, B = "Alice", "Bob"
 
 
+class Factorial:
+    def __init__(self, l: int = 10**6 + 5, mod: int = 10**9 + 7):
+        self.mod = mod
+        self.l = l
+        self.fact = fact = [1] * (l + 1)
+        self.finv = finv = [1] * (l + 1)
+        for i in range(1, l + 1):
+            fact[i] = fact[i - 1] * i % mod
+        finv[l] = pow(fact[l], mod - 2, mod)
+        for i in range(l - 1, -1, -1):
+            finv[i] = finv[i + 1] * (i + 1) % mod
+
+    @staticmethod
+    def build_inv(n: int, mod: int) -> list:
+        inv = [0] * (n + 1)
+        inv[0] = 1
+        for i in range(2, n + 1):
+            inv[i] = (mod - mod // i) * inv[mod % i] % mod
+        return inv
+
+    def comb(self, n: int, r: int) -> int:
+        return (
+            self.fact[n] * self.finv[r] % self.mod * self.finv[n - r] % self.mod
+            if n >= r >= 0
+            else 0
+        )
+
+    def factorial(self, n: int) -> int:
+        return self.fact[n]
+
+    def fac_inv(self, n: int) -> int:
+        return self.finv[n]
+
+    def inverse(self, n: int) -> int:
+        return self.fact[n - 1] * self.finv[n] % self.mod
+
+    def perm(self, n: int, r: int) -> int:
+        return self.fact[n] * self.finv[n - r] % self.mod if n >= r >= 0 else 0
+
+
 def helltractor():
-    pass
+    comb = Factorial(l=2 * 10**5 + 5, mod=MOD9).comb
+    for _ in range(II()):
+        n = II()
+        a = LII()
+        ans = 1
+        pre = 0
+        for i in range(n // 2, -1, -1):
+            x = a[i]
+            if i <= n // 2:
+                ans = ans * comb(n - 2 * i - pre, x) % MOD9
+                pre += x
+                if n - 2 * i < x or pre > n - 2 * i:
+                    ans = 0
+                    break
+            elif x:
+                ans = 0
+                break
+        if pre != n:
+            ans = 0
+        print(ans)
 
 
 if __name__ == "__main__":

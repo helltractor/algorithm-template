@@ -55,7 +55,7 @@
 
 - [Clist](https://clist.by/)
 - [Codeforces Visualizer](https://cfviz.netlify.app/)
-- [rating](https://zerotrac.github.io/leetcode_problem_rating/#/)
+- [Rating](https://zerotrac.github.io/leetcode_problem_rating/#/)
 - [Predicted Contests](https://lccn.lbao.site/)
 
 ## ProblemSet

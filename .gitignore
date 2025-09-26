@@ -11,3 +11,6 @@
 uv.lock
 .python-version
 pyproject.toml
+
+## Cph files
+.cph/

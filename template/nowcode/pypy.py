@@ -14,6 +14,7 @@ if ImportType:
     from sys import stdin, stdout, setrecursionlimit
 
 if InputType:
+
     class FastIO(IOBase):
         newlines = 0
 
@@ -71,8 +72,8 @@ if InputType:
 if ConstType:
     MOD1, MOD9 = 10**9 + 7, 998244353
     RD = random.randint(MOD1, MOD1 << 1)
-    D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)] 
-    D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)] 
+    D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+    D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
     Y, N, A, B = "Yes", "No", "Alice", "Bob"
 
 

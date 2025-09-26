@@ -12,6 +12,7 @@ if ImportType:
     from operator import add, iand, ior, itemgetter, mul, xor
 
 if InputType:
+
     class FastIO(IOBase):
         newlines = 0
 
@@ -69,8 +70,8 @@ if InputType:
 if ConstType:
     MOD1, MOD9, INF = 10**9 + 7, 998244353, float("inf")
     RD = random.randint(MOD1, MOD1 << 1)
-    D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)] 
-    D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)] 
+    D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+    D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
     Y, N, A, B = "Yes", "No", "Alice", "Bob"
 
 
