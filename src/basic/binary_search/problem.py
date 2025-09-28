@@ -8,7 +8,7 @@ from bisect import bisect_left
 
 class Solution:
 
-    def lc_2071(
+    def lc2071(
         self, tasks: List[int], workers: List[int], pills: int, strength: int
     ) -> int:
         """
@@ -47,7 +47,7 @@ class Solution:
                 right = mid - 1
         return ans
 
-    def lc_2071_bisect(
+    def lc2071_bisect(
         self, tasks: List[int], workers: List[int], pills: int, strength: int
     ) -> int:
         """

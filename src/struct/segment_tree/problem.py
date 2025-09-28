@@ -9,7 +9,7 @@ from struct.segment_tree import SegmentTree
 class Solution:
 
     @staticmethod
-    def lc_3525(nums: List[int], k: int, queries: List[List[int]]) -> List[int]:
+    def lc3525(nums: List[int], k: int, queries: List[List[int]]) -> List[int]:
         """
         link: https://leetcode.cn/problems/find-x-value-of-array-ii/
         """
@@ -42,7 +42,7 @@ class Solution:
             ans.append(cnt[x])
         return ans
 
-    def lc_3605(self, nums: List[int], maxC: int) -> int:
+    def lc3605(self, nums: List[int], maxC: int) -> int:
         """
         link: https://leetcode.cn/problems/minimum-stability-factor-of-array/
         """

@@ -10,7 +10,7 @@ from math.matrix_power.template import MatrixPower
 
 class Solution:
 
-    def lc_3337(self, s: str, t: int, nums: List[int]) -> int:
+    def lc3337(self, s: str, t: int, nums: List[int]) -> int:
         """
         link: https://leetcode.cn/problems/total-characters-in-string-after-transformations-ii/
         """
@@ -26,9 +26,9 @@ class Solution:
             ans += mt[ord(k) - 97][0] * v
         return ans % 1_000_000_007
 
-    def lc_1931(self, m: int, n: int) -> int:
+    def lc1931(self, m: int, n: int) -> int:
         """
-        https://leetcode.cn/problems/painting-a-grid-with-three-different-colors/
+        link: https://leetcode.cn/problems/painting-a-grid-with-three-different-colors/
         """
 
         def convert(base: int) -> str:
@@ -59,3 +59,38 @@ class Solution:
 
         ans = MatrixPower.matrix_power_numpy_list(mat, n - 1, [1] * nv)
         return sum(ans) % 1_000_000_007
+
+    def lc3700_1(self, n: int, l: int, r: int) -> int:
+        """
+        link:https://leetcode.cn/problems/number-of-zigzag-arrays-ii/
+        """
+        m = r - l + 1
+        mat = [[0] * (2 * m) for _ in range(2 * m)]
+        for i in range(m):
+            for j in range(m):
+                if i == j:
+                    continue
+                if i > j:
+                    mat[i][j + m] = 1
+                else:
+                    mat[i + m][j] = 1
+
+        f0 = [[1] for _ in range(2 * m)]
+        res = MatrixPower.matrix_power(mat, n - 1, f0)
+        ans = sum(sum(row) for row in res)
+        return ans % 1_000_000_007
+
+    def lc3700_2(self, n: int, l: int, r: int) -> int:
+        """
+        link:https://leetcode.cn/problems/number-of-zigzag-arrays-ii/
+        """
+        m = r - l
+        mat = [[0] * m for _ in range(m)]
+        for i in range(m):
+            for j in range(m - i - 1, m):
+                mat[i][j] = 1
+
+        f0 = [[1] for _ in range(m)]
+        res = MatrixPower.matrix_power(mat, n - 1, f0)
+        ans = sum(sum(row) for row in res)
+        return 2 * ans % 1_000_000_007

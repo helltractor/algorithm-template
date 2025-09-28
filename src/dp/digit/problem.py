@@ -6,7 +6,7 @@ from functools import cache
 
 class Solution:
 
-    def lc_2376(self, n: int) -> int:
+    def lc2376(self, n: int) -> int:
         """
         link: https://leetcode.cn/problems/count-special-integers/
         """
@@ -33,7 +33,7 @@ class Solution:
 
         return dfs(0, 0, True, False)
 
-    def lc_2999(self, start: int, finish: int, limit: int, s: str) -> int:
+    def lc2999(self, start: int, finish: int, limit: int, s: str) -> int:
         """
         link: https://leetcode.cn/problems/count-the-number-of-powerful-integers/
         """
@@ -65,7 +65,7 @@ class Solution:
 
         return dfs(0, True, True)
 
-    def lc_2827(self, low: int, high: int, k: int) -> int:
+    def lc2827(self, low: int, high: int, k: int) -> int:
         """
         link: https://leetcode.cn/problems/number-of-beautiful-integers-in-the-range/
         """

@@ -4,7 +4,7 @@ from util.io.fast_io import II, LI
 
 class Solution:
 
-    def cf_2121g():
+    def cf2121g():
         """
         link: https://codeforces.com/problemset/problem/2121/G
         tag: fenwick tree | prefix sum | greedy

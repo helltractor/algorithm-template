@@ -3,7 +3,7 @@ from math.xor_basis.template import XorBasis
 
 
 class Solution:
-    def lc_3681(self, nums: List[int]) -> int:
+    def lc3681(self, nums: List[int]) -> int:
         """
         link: https://leetcode.cn/problems/maximum-xor-of-subsequences/
         """

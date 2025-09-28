@@ -8,7 +8,7 @@ from typing import List
 
 class Solution:
 
-    def lc_472(self, words: List[str]) -> List[str]:
+    def lc472(self, words: List[str]) -> List[str]:
         """
         link: https://leetcode.cn/problems/concatenated-words/
         """
@@ -36,7 +36,7 @@ class Solution:
             trie.insert(word)
         return ans
 
-    def lc_1803(self, nums: List[int], low: int, high: int) -> int:
+    def lc1803(self, nums: List[int], low: int, high: int) -> int:
         """
         link: https://leetcode.cn/problems/count-pairs-with-xor-in-a-range/
         """

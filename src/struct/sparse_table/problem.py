@@ -5,7 +5,7 @@ from struct.sparse_table.template import SparseTable
 
 class Solution:
 
-    def lc_3691(self, nums: List[int], k: int) -> int:
+    def lc3691(self, nums: List[int], k: int) -> int:
         """
         link: https://leetcode.cn/problems/maximum-total-subarray-value-ii/
         """

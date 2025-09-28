@@ -8,14 +8,14 @@ from src.tree.lca.template import LcaWithWeight, LowestCommonAncestor
 
 class Solution:
 
-    def lc_3553(self, edges: List[List[int]], queries: List[List[int]]) -> List[int]:
+    def lc3553(self, edges: List[List[int]], queries: List[List[int]]) -> List[int]:
         g = LcaWithWeight(edges)
         return [
             (g.get_dis(a, b) + g.get_dis(b, c) + g.get_dis(a, c)) // 2
             for a, b, c in queries
         ]
 
-    def lc_3585(self, edges: List[List[int]], queries: List[List[int]]) -> List[int]:
+    def lc3585(self, edges: List[List[int]], queries: List[List[int]]) -> List[int]:
         g = LcaWithWeight(edges)
         ans = [0] * len(queries)
         for i, (u, v) in enumerate(queries):
@@ -32,7 +32,7 @@ class Solution:
                 ans[i] = g.pa[to][0]
         return ans
 
-    def cf_2117f():
+    def cf2117f():
         for _ in range(II()):
             n = II()
             leaf = []

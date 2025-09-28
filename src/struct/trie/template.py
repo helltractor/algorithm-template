@@ -93,6 +93,19 @@ class ZeroOneTrie:
                 bit ^= 1
             cur = cur.son[bit]
         return ans
+    
+    def min_xor(self, val: int) -> int:
+        """返回字典树中与 val 异或结果最小的值"""
+        cur = self
+        ans = 0
+        for i in range(ZeroOneTrie.HIGH_BIT, -1, -1):
+            bit = val >> i & 1
+            if cur.son[bit] and cur.son[bit].cnt:
+                cur = cur.son[bit]
+            else:
+                ans |= 1 << i
+                cur = cur.son[bit ^ 1]
+        return ans
 
     def search(self, val: int, limit: int) -> bool:
         """返回字典树中与 val 异或结果小于 limit 的个数"""
