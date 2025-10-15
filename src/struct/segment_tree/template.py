@@ -31,6 +31,9 @@ class SegmentTree:
         for i in range(self._size - 1, 0, -1):
             self._update(i)
 
+    def _update(self, k: int) -> None:
+        self._d[k] = self._op(self._d[k << 1], self._d[(k << 1) | 1])
+
     def set(self, p: int, x: typing.Any) -> None:
         assert 0 <= p < self._n
 
@@ -120,9 +123,6 @@ class SegmentTree:
             sm = self._op(self._d[right], sm)
 
         return 0
-
-    def _update(self, k: int) -> None:
-        self._d[k] = self._op(self._d[k << 1], self._d[(k << 1) | 1])
 
 
 class LazySegmentTree:

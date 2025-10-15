@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from collections import Counter
+from collections import Counter, defaultdict
 from heapq import heappop, heappush
+from typing import Any
 
 
 class DualHeap:
@@ -15,7 +16,7 @@ class DualHeap:
         self.sum_kth = 0  # 前k小数字的和
         self.small_size = 0
         self.large_size = 0
-    
+
     def prune(self, h: list) -> None:
         """修剪h，使h堆顶的已标记删除元素全部弹出"""
         delay_rm = self.delay_rm
@@ -29,10 +30,12 @@ class DualHeap:
                 heappop(h)
             else:
                 break
-    
+
     def make_balance(self) -> None:
         """调整small和large的大小，使small中达到k个（或清空large）"""
-        k = self.k or (self.small_size + self.large_size + 1) // 2  # 如果self.k是0，表示前后要balance
+        k = (
+            self.k or (self.small_size + self.large_size + 1) // 2
+        )  # 如果self.k是0，表示前后要balance
         if self.small_size > k:
             heappush(self.large, -self.small[0])
             self.sum_kth += heappop(self.small)  # 其实是-=负数
@@ -45,7 +48,7 @@ class DualHeap:
             self.small_size += 1
             self.large_size -= 1
             self.prune(self.large)
-    
+
     def add(self, v: int) -> None:
         """添加值v，判断需要加到哪个堆"""
         small = self.small
@@ -57,7 +60,7 @@ class DualHeap:
             heappush(self.large, v)
             self.large_size += 1
         self.make_balance()
-    
+
     def remove(self, v: int) -> None:
         """移除v，延时删除，但可以实时判断是否贡献了前k和"""
         small, large = self.small, self.large
@@ -72,3 +75,41 @@ class DualHeap:
             if v == -small[0]:
                 self.prune(small)
         self.make_balance()
+
+
+# link: https://leetcode.cn/circle/discuss/mOr1u6/
+class LazyHeap:
+    def __init__(self):
+        self.heap = []  # 最小堆（最大堆可以把数字取反或重载 __lt__）
+        self.remove_cnt = defaultdict(int)  # 每个元素剩余需要删除的次数
+        self.size = 0  # 堆的实际大小
+
+    # 删除
+    def remove(self, x: Any) -> None:
+        self.remove_cnt[x] += 1  # 懒删除
+        self.size -= 1
+
+    # 正式执行删除操作
+    def _apply_remove(self) -> None:
+        while self.heap and self.remove_cnt[self.heap[0]] > 0:
+            self.remove_cnt[self.heap[0]] -= 1
+            heappop(self.heap)
+
+    # 查看堆顶
+    def top(self) -> Any:
+        self._apply_remove()
+        return self.heap[0]  # 真正的堆顶
+
+    # 出堆
+    def pop(self) -> Any:
+        self._apply_remove()
+        self.size -= 1
+        return heappop(self.heap)
+
+    # 入堆
+    def push(self, x: Any) -> None:
+        if self.remove_cnt[x] > 0:
+            self.remove_cnt[x] -= 1  # 抵消之前的删除
+        else:
+            heappush(self.heap, x)
+        self.size += 1

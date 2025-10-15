@@ -6,8 +6,8 @@ class StringHash:
     def __init__(self, s: str) -> None:
         """字符串哈希，用O(n)时间预处理，用O(1)时间获取段的哈希值"""
         self.n = n = len(s)
-        self.BASE = BASE = 131313  # 进制 31,131,13131,13331,131313
-        self.MOD = MOD = 10 ** 13 + 7  # 10**13+37 ,10**13+51 ,10**13+99 ,10**13+129 ,10**13+183
+        self.BASE = BASE = 131313  # 进制 31,131,13131
+        self.MOD = MOD = 10**13 + 7  # 10**13+37 10**13+51,10**13+99
         self.h = h = [0] * (n + 1)
         self.p = p = [1] * (n + 1)
         for i in range(1, n + 1):

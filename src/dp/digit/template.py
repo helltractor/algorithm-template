@@ -29,9 +29,9 @@ class DigitDynamicProgramming:
 
     def count_numbers_in_range(self, low: int, high: int) -> int:
         n = len(str(high))
+        diff = n - len(low)
         high = list(map(int, str(high)))
         low = list(map(int, str(low).zfill(n)))
-        diff = n - len(low)
 
         @lru_cache(None)
         def dfs(i: int, limit_low: bool, limit_high: bool, is_num: bool) -> int:
