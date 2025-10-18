@@ -18,6 +18,7 @@ if ImportType:
     from sys import stdin, stdout, setrecursionlimit
 
 if InputType:
+
     class FastIO(IOBase):
         newlines = 0
 
@@ -73,9 +74,11 @@ if InputType:
     LGMI = lambda: list(map(lambda x: int(x) - 1, input().split()))
 
 if DecoratorType:
+
     def bootstrap(f, stack=[]):
         def wrappedfunc(*args, **kwargs):
-            if stack: return f(*args, **kwargs)
+            if stack:
+                return f(*args, **kwargs)
             else:
                 to = f(*args, **kwargs)
                 while True:
@@ -84,42 +87,91 @@ if DecoratorType:
                         to = next(to)
                     else:
                         stack.pop()
-                        if not stack: break
+                        if not stack:
+                            break
                         to = stack[-1].send(to)
                 return to
+
         return wrappedfunc
+
 
 if FunctionType:
     fmax = lambda x, y: x if x > y else y
     fmin = lambda x, y: x if x < y else y
-    fgcd = lambda x, y: y if x == 0 else fgcd(y % x, x)
 
 if ConstType:
-    MOD1, MOD9 = 10 ** 9 + 7, 998244353
+    MOD1, MOD9 = 1000000007, 998244353
     RD = random.randint(MOD1, MOD1 << 1)
-    D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]    
-    D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]    
+    D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+    D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
     Y, N = "Yes", "No"
     A, B = "Alice", "Bob"
 
-from fractions import Fraction
+
+class MatrixPower:
+
+    @staticmethod
+    def matrix_multiply(
+        a: List[List[int]], b: List[List[int]], mod: int = 1_000_000_007
+    ) -> List[List[int]]:
+        """Multiply two matrices a and b under modulo, a @ b."""
+        return [
+            [sum(x * y % mod for x, y in zip(a_row, b_col)) % mod for b_col in zip(*b)]
+            for a_row in a
+        ]
+
+    @staticmethod
+    def matrix_power(
+        base: List[List[int]], n: int, f0: List[List[int]], mod: int = 1_000_000_007
+    ) -> List[List[int]]:
+        """Raise matrix base to the power of n under modulo, base ^ n @ f0."""
+        mul = lambda a, b: [
+            [sum(x * y % mod for x, y in zip(a_row, b_col)) % mod for b_col in zip(*b)]
+            for a_row in a
+        ]
+        res = f0
+        while n:
+            if n & 1:
+                res = mul(base, res)
+            base = mul(base, base)
+            n >>= 1
+        return res
+
 
 def helltractor():
-    n = II()
-    a = LII()
-    b = LII()
-    cnt = Counter()
+    n, m = MII()
+    # f[i] = f[i - 1] + f[i - m]
+    mat = [[0] * m for _ in range(m)]
+    mat[0][0] = 1  # f[i - 1] -> f[i]
+    mat[0][m - 1] = 1  # f[i - m] -> f[i]
+    for i in range(1, m):
+        mat[i][i - 1] = 1  # 其余位置下移
+
+    f0 = [[1] for _ in range(m)]
+    ans = 1
+    if n >= m:
+        res = MatrixPower().matrix_power(mat, n - m + 1, f0, MOD1)
+        ans = res[0][0]
+    print(ans)
+
+
+def helltractor_math():
+    from math import comb
+
+    n, m = MII()
+    # c(n + 1, 0) + c(n - m + 1, 1) + c(n - 2 * m + 1, 2) + ... + c(n - div * m + 1, div)
+    # div, mod = divmod(n, m)
     ans = 0
-    for x, y in zip(a, b):
-        if x == 0:
-            ans += int(y == 0)
-            continue
-        # cnt[Fraction(y, x)] += 1
-        # fgcd can keep x signal, 5 % -1 = -1
-        g = fgcd(x, y)
-        cnt[(y // g, x // g)] += 1
-       
-    print(ans + max(cnt.values(), default=0))
+    div, mod = divmod(n, m)
+    for i in range(div + 1):
+        tmp = n - i * m
+        if tmp < i:
+            ans += comb(i + 1, tmp)
+        else:
+            ans += comb(tmp + 1, i)
+        ans %= MOD1
+        print(ans, i, tmp)
+    print(ans % MOD1)
 
 
 if __name__ == "__main__":

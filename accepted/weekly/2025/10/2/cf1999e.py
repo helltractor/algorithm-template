@@ -18,6 +18,7 @@ if ImportType:
     from sys import stdin, stdout, setrecursionlimit
 
 if InputType:
+
     class FastIO(IOBase):
         newlines = 0
 
@@ -73,9 +74,11 @@ if InputType:
     LGMI = lambda: list(map(lambda x: int(x) - 1, input().split()))
 
 if DecoratorType:
+
     def bootstrap(f, stack=[]):
         def wrappedfunc(*args, **kwargs):
-            if stack: return f(*args, **kwargs)
+            if stack:
+                return f(*args, **kwargs)
             else:
                 to = f(*args, **kwargs)
                 while True:
@@ -84,42 +87,37 @@ if DecoratorType:
                         to = next(to)
                     else:
                         stack.pop()
-                        if not stack: break
+                        if not stack:
+                            break
                         to = stack[-1].send(to)
                 return to
+
         return wrappedfunc
+
 
 if FunctionType:
     fmax = lambda x, y: x if x > y else y
     fmin = lambda x, y: x if x < y else y
-    fgcd = lambda x, y: y if x == 0 else fgcd(y % x, x)
 
 if ConstType:
-    MOD1, MOD9 = 10 ** 9 + 7, 998244353
+    MOD1, MOD9 = 1000000007, 998244353
     RD = random.randint(MOD1, MOD1 << 1)
-    D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]    
-    D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]    
+    D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+    D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
     Y, N = "Yes", "No"
     A, B = "Alice", "Bob"
 
-from fractions import Fraction
+MX = 2 * 10**5 + 5
+f = [0] * (MX + 1)
+for i in range(1, MX + 1):
+    f[i] = f[i // 3] + 1
+pre = list(accumulate(f))
+
 
 def helltractor():
-    n = II()
-    a = LII()
-    b = LII()
-    cnt = Counter()
-    ans = 0
-    for x, y in zip(a, b):
-        if x == 0:
-            ans += int(y == 0)
-            continue
-        # cnt[Fraction(y, x)] += 1
-        # fgcd can keep x signal, 5 % -1 = -1
-        g = fgcd(x, y)
-        cnt[(y // g, x // g)] += 1
-       
-    print(ans + max(cnt.values(), default=0))
+    for _ in range(II()):
+        l, r = MII()
+        print(pre[r] - pre[l - 1] + f[l])
 
 
 if __name__ == "__main__":
