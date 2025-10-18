@@ -1,5 +1,5 @@
 ImportType = InputType = ConstType = 1
-DecoratorType = FunctinoType = 1
+DecoratorType = FunctionType = 1
 if ImportType:
     import os, sys, random, threading
     from random import randint, choice, shuffle
@@ -44,7 +44,7 @@ if DecoratorType:
                 return to
         return wrappedfunc
 
-if FunctinoType:
+if FunctionType:
     class Math:
         __slots__ = ["mod", "l", "fact", "inv"]
 

@@ -1,5 +1,5 @@
 ImportType = InputType = ConstType = 1
-DecoratorType = FunctinoType = 1
+DecoratorType = FunctionType = 1
 if ImportType:
     import os, sys, random, threading
     from random import randint, choice, shuffle
@@ -95,7 +95,7 @@ if DecoratorType:
         return wrappedfunc
 
 
-if FunctinoType:
+if FunctionType:
     fmax = lambda x, y: x if x > y else y
     fmin = lambda x, y: x if x < y else y
 
