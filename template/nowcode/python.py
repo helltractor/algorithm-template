@@ -1,15 +1,16 @@
 ImportType = InputType = ConstType = 1
 if ImportType:
-    import os, random, sys
-    from math import gcd, lcm, comb
-    from collections import Counter, defaultdict, deque
-    from functools import lru_cache, reduce
-    from itertools import accumulate, combinations, permutations
-    from heapq import nsmallest, nlargest, heappushpop, heapify, heappop, heappush
-    from io import BytesIO, IOBase
+    import os, sys, random
+    from io import IOBase, BytesIO
     from copy import deepcopy
+    from decimal import Decimal, getcontext
+    from types import GeneratorType
+    from functools import lru_cache, reduce
     from bisect import bisect_left, bisect_right
-    from operator import add, iand, ior, itemgetter, mul, xor
+    from collections import Counter, defaultdict, deque
+    from itertools import accumulate, combinations, permutations
+    from heapq import heapify, heappop, heappush
+    from math import ceil, floor, sqrt, isqrt, factorial, gcd, log, log10, log2, inf, pi
 
 if InputType:
 
@@ -72,7 +73,7 @@ if ConstType:
     RD = random.randint(MOD1, MOD1 << 1)
     D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]
     D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
-    Y, N, A, B = "Yes", "No", "Alice", "Bob"
+    Y, N = "Yes", "No"
 
 
 def helltractor():

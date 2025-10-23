@@ -116,46 +116,34 @@ def helltractor():
         lmx = max(l for l, r in a)
         rmn = min(r for l, r in a)
         if lmx <= rmn:
-            pos = lmx
+            ans[lmx] = 0
             cur = 1
-            for i in range(n):
-                if i == pos:
-                    ans[i] = 0
-                else:
-                    ans[i] = cur
+            for j in range(n):
+                if ans[j] == -1:
+                    ans[j] = cur
                     cur += 1
         else:
-            cnt_l = [0] * n
-            cnt_r = [0] * n
-            for l, r in a:
-                cnt_l[l] += 1
-                cnt_r[r] += 1
-            pos = -1
             for i in range(n):
-                if cnt_l[i] > 0 and cnt_r[i] == 0:
-                    pos = i
+                l = 0
+                r = n - 1
+                for j in range(m):
+                    if a[j][0] <= i <= a[j][1]:
+                        l = fmax(l, a[j][0])
+                        r = fmin(r, a[j][1])
+                if l < r:
+                    ans[i] = 0
+                    if i - 1 >= l:
+                        ans[i - 1] = 1
+                    else:
+                        ans[i + 1] = 1
+                    cur = 2
+                    for j in range(n):
+                        if ans[j] == -1:
+                            ans[j] = cur
+                            cur += 1
                     break
-                if cnt_r[i] > 0 and cnt_l[i] == 0:
-                    pos = i
-                    break
-            if pos == -1:
-                ans[pos] = 0
-                if pos + 1 < n:
-                    ans[pos + 1] = 1
-                else:
-                    ans[pos - 1] = 1
-                cur = 2
-                for i in range(n):
-                    if ans[i] == -1:
-                        ans[i] = cur
-                        cur += 1
             else:
-                ans = [0, 2, 1] + [-1] * (n - 3)
-                cur = 3
-                for i in range(n):
-                    if ans[i] == -1:
-                        ans[i] = cur
-                        cur += 1
+                ans = [0, 2, 1] + list(range(3, n))
         print(" ".join(map(str, ans)))
 
 

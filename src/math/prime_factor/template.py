@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from collections import Counter
-from typing import List
+from collections import defaultdict
+from typing import List, Set
 
 
 class Primes:
@@ -99,12 +99,12 @@ class Primes:
         return fac
 
     @staticmethod
-    def prime_factor(n: int) -> Counter:
+    def prime_factor(n: int) -> Set[int]:
         """
         统计一个数的质因子个数
         a = p1 ^ e1 * p2 ^ e2 * p3 ^ e3
         """
-        cnt = Counter()
+        cnt = defaultdict(int)
         d = 2
         while d * d <= n:
             while n % d == 0:
@@ -114,3 +114,18 @@ class Primes:
         if n > 1:
             cnt[n] += 1
         return cnt
+
+    @staticmethod
+    def prefect_sqrt_core(n: int) -> int:
+        """
+        计算完全平方数的核
+        核：将一个数的质因子分解后，去掉所有指数为偶数的质因子，剩下的质因子的乘积称为该数的核。
+        """
+        core = [0] * (n + 1)
+        for i in range(1, n + 1):
+            if core[i]:
+                continue
+            for j in range(1, n + 1):
+                if i * j * j > n:
+                    break
+                core[i * j * j] = i

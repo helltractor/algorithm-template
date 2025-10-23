@@ -1,16 +1,21 @@
 ImportType = InputType = ConstType = 1
+DecoratorType = FunctionType = 1
 if ImportType:
-    import os, sys, random
-    from io import IOBase, BytesIO
+    import os, sys, random, threading
+    from random import randint, choice, shuffle
     from copy import deepcopy
-    from decimal import Decimal, getcontext
+    from io import BytesIO, IOBase
     from types import GeneratorType
     from functools import lru_cache, reduce
     from bisect import bisect_left, bisect_right
     from collections import Counter, defaultdict, deque
     from itertools import accumulate, combinations, permutations
     from heapq import heapify, heappop, heappush
-    from math import ceil, floor, sqrt, factorial, gcd, log, log10, log2, inf, pi
+    from typing import Generic, Iterable, Iterator, TypeVar, Union, List
+    from string import ascii_lowercase, ascii_uppercase, digits
+    from math import ceil, floor, sqrt, pi, factorial, gcd, log, log10, log2, inf
+    from decimal import Decimal, getcontext
+    from sys import stdin, stdout, setrecursionlimit
 
 if InputType:
 
@@ -68,16 +73,61 @@ if InputType:
     GMI = lambda: map(lambda x: int(x) - 1, input().split())
     LGMI = lambda: list(map(lambda x: int(x) - 1, input().split()))
 
+if DecoratorType:
+
+    def bootstrap(f, stack=[]):
+        def wrappedfunc(*args, **kwargs):
+            if stack:
+                return f(*args, **kwargs)
+            else:
+                to = f(*args, **kwargs)
+                while True:
+                    if type(to) is GeneratorType:
+                        stack.append(to)
+                        to = next(to)
+                    else:
+                        stack.pop()
+                        if not stack:
+                            break
+                        to = stack[-1].send(to)
+                return to
+
+        return wrappedfunc
+
+
+if FunctionType:
+    fmax = lambda x, y: x if x > y else y
+    fmin = lambda x, y: x if x < y else y
+
 if ConstType:
-    MOD1, MOD9 = 10**9 + 7, 998244353
+    MOD1, MOD9 = 1000000007, 998244353
     RD = random.randint(MOD1, MOD1 << 1)
     D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]
     D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
     Y, N = "Yes", "No"
+    A, B = "Alice", "Bob"
 
 
 def helltractor():
-    pass
+    for _ in range(II()):
+        n = II()
+        a = LII()
+        mx = 0
+        for i, x in enumerate(a):
+            if x > mx:
+                mx = x
+            if i % 2:
+                a[i] = mx
+        ans = 0
+        for i in range(0, n, 2):
+            mn = inf
+            if i:
+                mn = min(mn, a[i - 1])
+            if i + 1 < n:
+                mn = min(mn, a[i + 1])
+            if a[i] >= mn:
+                ans += a[i] - mn + 1
+        print(ans)
 
 
 if __name__ == "__main__":

@@ -1,16 +1,20 @@
 ImportType = InputType = ConstType = 1
+DecoratorType = FunctionType = 1
 if ImportType:
     import os, sys, random
-    from io import IOBase, BytesIO
+    from random import randint, choice, shuffle
     from copy import deepcopy
-    from decimal import Decimal, getcontext
+    from io import BytesIO, IOBase
     from types import GeneratorType
     from functools import lru_cache, reduce
     from bisect import bisect_left, bisect_right
     from collections import Counter, defaultdict, deque
     from itertools import accumulate, combinations, permutations
     from heapq import heapify, heappop, heappush
-    from math import ceil, floor, sqrt, factorial, gcd, log, log10, log2, inf, pi
+    from typing import Generic, Iterable, Iterator, TypeVar, Union, List
+    from string import ascii_lowercase, ascii_uppercase, digits
+    from math import ceil, floor, sqrt, isqrt, factorial, gcd, log, log10, log2, inf, pi
+    from decimal import Decimal, getcontext
 
 if InputType:
 
@@ -68,16 +72,99 @@ if InputType:
     GMI = lambda: map(lambda x: int(x) - 1, input().split())
     LGMI = lambda: list(map(lambda x: int(x) - 1, input().split()))
 
+if DecoratorType:
+
+    def bootstrap(f, stack=[]):
+        def wrappedfunc(*args, **kwargs):
+            if stack:
+                return f(*args, **kwargs)
+            else:
+                to = f(*args, **kwargs)
+                while True:
+                    if type(to) is GeneratorType:
+                        stack.append(to)
+                        to = next(to)
+                    else:
+                        stack.pop()
+                        if not stack:
+                            break
+                        to = stack[-1].send(to)
+                return to
+
+        return wrappedfunc
+
+
+if FunctionType:
+    fmax = lambda x, y: x if x > y else y
+    fmin = lambda x, y: x if x < y else y
+
 if ConstType:
-    MOD1, MOD9 = 10**9 + 7, 998244353
-    RD = random.randint(MOD1, MOD1 << 1)
+    MOD1, MOD9 = 1000000007, 998244353
+    RD = randint(MOD1, MOD1 << 1)
     D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]
     D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
     Y, N = "Yes", "No"
+    A, B = "Alice", "Bob"
 
 
+class FenwickTree:
+    __slots__ = ["n", "c"]
+
+    def __init__(self, n: int) -> None:
+        self.n = n
+        self.c = [0] * (n + 1)
+
+    def update(self, x: int, delta: int) -> None:
+        while x <= self.n:
+            self.c[x] ^= delta
+            x += x & -x
+
+    def query(self, x: int) -> int:
+        s = 0
+        while x > 0:
+            s ^= self.c[x]
+            x -= x & -x
+        return s
+
+    def range_query(self, l: int, r: int) -> int:
+        return self.query(r) ^ self.query(l - 1)
+
+# reduce(xor, a) -> v % 2 == 1
+# reduce(xor, set(a)) ^ reduce(xor, a) -> v and v % 2 == 0
 def helltractor():
-    pass
+    n = II()
+    a = LII()
+    m = II()
+    qs = []
+    for i in range(m):
+        l, r = MII()
+        qs.append(r << 40 | l << 20 | i)
+    qs.sort()
+
+    tree = FenwickTree(n)
+    b = {x: i for i, x in enumerate(set(a))}
+    ans = [0] * m
+    last = [0] * len(b)
+    pre = [0] * (n + 1)
+    for i in range(n):
+        pre[i + 1] = pre[i] ^ a[i]
+
+    i = 1
+    bit = (1 << 20) - 1
+    for q in qs:
+        l = q >> 20 & bit
+        r = q >> 40 & bit
+        j = q & bit
+        while i <= r:
+            val = a[i - 1]
+            idx = b[val]
+            if last[idx]:
+                tree.update(last[idx], val)
+            tree.update(i, val)
+            last[idx] = i
+            i += 1
+        ans[j] = tree.range_query(l, r) ^ pre[r] ^ pre[l - 1]
+    print("\n".join(map(str, ans)))
 
 
 if __name__ == "__main__":

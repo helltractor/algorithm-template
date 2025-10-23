@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @link: https://leetcode.cn/problems/find-minimum-diameter-after-merging-two-trees/solutions/2827577/xiang-jie-bo-yang-cong-da-fa-hao-by-l00-yp6l/
 
-from typing import List
+from typing import List, Tuple
 
 
 class TreeDiameter:
@@ -29,6 +29,31 @@ class TreeDiameter:
         diameter = 0
         dfs(0, -1)
         return diameter
+
+    @staticmethod
+    def treeDiameterVetexDFS(edges: List[List[int]]) -> Tuple[int]:
+        n = len(edges) + 1
+        g = [[] for _ in range(n)]
+        for u, v in edges:
+            g[u].append(v)
+            g[v].append(u)
+
+        def dfs(x: int, depth: int, dct: List[int]):
+            dct[x] = depth
+            for y in g[x]:
+                if dct[y] != -1:
+                    continue
+                dfs(y, depth + 1, dct)
+
+        dct = [-1] * n
+        dfs(0, 0, dct)
+
+        u = max((d, i) for i, d in enumerate(dct))[1]
+        dct_u = [-1] * n
+        dfs(u, 0, dct_u)
+
+        v = max((d, i) for i, d in enumerate(dct_u))[1]
+        return dct_u[v], u, v
 
     @staticmethod
     def treeDiameterTopologicalSort(edges: List[List[int]]) -> int:
