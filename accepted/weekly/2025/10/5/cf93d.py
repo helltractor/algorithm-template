@@ -1,0 +1,164 @@
+ImportType = InputType = ConstType = 1
+DecoratorType = FunctionType = 1
+if ImportType:
+    import os, sys, random
+    from random import randint, choice, shuffle
+    from copy import deepcopy
+    from io import BytesIO, IOBase
+    from types import GeneratorType
+    from functools import lru_cache, reduce
+    from bisect import bisect_left, bisect_right
+    from collections import Counter, defaultdict, deque
+    from itertools import accumulate, combinations, permutations
+    from heapq import heapify, heappop, heappush
+    from typing import Generic, Iterable, Iterator, TypeVar, Union, List
+    from string import ascii_lowercase, ascii_uppercase, digits
+    from math import ceil, floor, sqrt, isqrt, factorial, gcd, log, log10, log2, inf, pi
+    from decimal import Decimal, getcontext
+
+if InputType:
+
+    class FastIO(IOBase):
+        newlines = 0
+
+        def __init__(self, file):
+            self._fd = file.fileno()
+            self.buffer = BytesIO()
+            self.writable = "x" in file.mode or "r" not in file.mode
+            self.write = self.buffer.write if self.writable else None
+
+        def read(self):
+            while True:
+                b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
+                if not b:
+                    break
+                ptr = self.buffer.tell()
+                self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
+            self.newlines = 0
+            return self.buffer.read()
+
+        def readline(self):
+            while self.newlines == 0:
+                b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
+                self.newlines = b.count(b"\n") + (not b)
+                ptr = self.buffer.tell()
+                self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
+            self.newlines -= 1
+            return self.buffer.readline()
+
+        def flush(self):
+            if self.writable:
+                os.write(self._fd, self.buffer.getvalue())
+                self.buffer.truncate(0), self.buffer.seek(0)
+
+    class IOWrapper(IOBase):
+        def __init__(self, file):
+            self.buffer = FastIO(file)
+            self.flush = self.buffer.flush
+            self.writable = self.buffer.writable
+            self.write = lambda s: self.buffer.write(s.encode("ascii"))
+            self.read = lambda: self.buffer.read().decode("ascii")
+            self.readline = lambda: self.buffer.readline().decode("ascii")
+
+    BUFSIZE = 1 << 12
+    sys.stdin = IOWrapper(sys.stdin)
+    sys.stdout = IOWrapper(sys.stdout)
+    input = lambda: sys.stdin.readline().rstrip("\r\n")
+    I = lambda: input()
+    II = lambda: int(input())
+    MII = lambda: map(int, input().split())
+    LI = lambda: list(input())
+    LII = lambda: list(map(int, input().split()))
+    GMI = lambda: map(lambda x: int(x) - 1, input().split())
+    LGMI = lambda: list(map(lambda x: int(x) - 1, input().split()))
+
+if DecoratorType:
+
+    def bootstrap(f, stack=[]):
+        def wrappedfunc(*args, **kwargs):
+            if stack:
+                return f(*args, **kwargs)
+            else:
+                to = f(*args, **kwargs)
+                while True:
+                    if type(to) is GeneratorType:
+                        stack.append(to)
+                        to = next(to)
+                    else:
+                        stack.pop()
+                        if not stack:
+                            break
+                        to = stack[-1].send(to)
+                return to
+
+        return wrappedfunc
+
+
+if FunctionType:
+    fmax = lambda x, y: x if x > y else y
+    fmin = lambda x, y: x if x < y else y
+
+if ConstType:
+    MOD1, MOD9 = 1000000007, 998244353
+    RD = randint(MOD1, MOD1 << 1)
+    D4 = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+    D8 = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+    Y, N = "Yes", "No"
+    A, B = "Alice", "Bob"
+
+
+def matrix_power(
+    base: List[List[int]], n: int, f0: List[List[int]], mod: int = 1_000_000_007
+) -> List[List[int]]:
+    """Raise matrix base to the power of n under modulo, base ^ n @ f0."""
+    mul = lambda a, b: [
+        [sum(x * y % mod for x, y in zip(a_row, b_col)) % mod for b_col in zip(*b)]
+        for a_row in a
+    ]
+    res = f0
+    while n:
+        if n & 1:
+            res = mul(base, res)
+        base = mul(base, base)
+        n >>= 1
+    return res
+
+
+def helltractor():
+    L, R = MII()
+
+    def f(n):
+        if n == 0:
+            return 0
+        if n == 1:
+            return 4
+        m = [[0] * 17 for _ in range(17)]
+        f0 = [[0] for _ in range(17)]
+        m[16][16] = 1
+        f0[16][0] = 4
+
+        # wbry -> 0123
+        # wr, rw, by, yb, bwr, rwb not allowed
+        for i in range(4):
+            for j in range(4):
+                if i == j or i + j == 3:
+                    continue
+                for k in range(4):
+                    if j == k or j + k == 3 or (j == 0 and i + k == 3):
+                        continue
+                    m[i * 4 + j][j * 4 + k] = 1
+                    m[16][j * 4 + k] += 1
+                f0[i * 4 + j][0] = 1
+                f0[16][0] += 1
+        return matrix_power(m, n - 2, f0)[16][0]
+
+    def cal(n):
+        inv2 = (MOD1 + 1) // 2
+        return (f(n) + f((n + 1) // 2)) * inv2
+
+    ans = (cal(R) - cal(L - 1)) % MOD1
+    print(ans)
+
+
+if __name__ == "__main__":
+    helltractor()
