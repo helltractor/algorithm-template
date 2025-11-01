@@ -299,7 +299,7 @@ class LazySegmentTree:
 
         return self._n
 
-    def min_left(self, right: int, g: typing.Any) -> int:
+    def min_left(self, right: int, g: typing.Callable[[typing.Any], bool]) -> int:
         assert 0 <= right <= self._n
         assert g(self._e)
 
