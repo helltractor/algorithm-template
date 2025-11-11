@@ -111,16 +111,14 @@ def helltractor():
     for _ in range(II()):
         n = II()
         a = LII()
-        ans = 0
-        pos = [[] for _ in range(n + 1)]
-        for i, v in enumerate(a):
-            pos[v].append(i)
-        for i in range(1, n):
-            for j in range(len(pos[i]) - 1, -1, -1):
-                if pos[i + 1] and pos[i][j] < pos[i + 1][-1]:
-                    pos[i + 1].pop()
-                    ans += 1
-        print(ans)
+        ans = [-1]
+        for i in range(n):
+            for j in range(i):
+                if a[i] % a[j] % 2 == 0:
+                    ans = [a[j], a[i]]
+            if len(ans) > 1:
+                break
+        print(*ans)
 
 
 if __name__ == "__main__":

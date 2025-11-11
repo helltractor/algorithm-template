@@ -108,18 +108,19 @@ if ConstType:
 
 
 def helltractor():
-    for _ in range(II()):
-        n = II()
-        a = LII()
-        ans = 0
-        pos = [[] for _ in range(n + 1)]
-        for i, v in enumerate(a):
-            pos[v].append(i)
-        for i in range(1, n):
-            for j in range(len(pos[i]) - 1, -1, -1):
-                if pos[i + 1] and pos[i][j] < pos[i + 1][-1]:
-                    pos[i + 1].pop()
-                    ans += 1
+    x = II()
+    n = II()
+    w = LII()
+    q = II()
+    qs = [II() - 1 for _ in range(q)]
+    use = [False] * (n + 1)
+    ans = x
+    for i in qs:
+        if use[i]:
+            ans -= w[i]
+        else:
+            ans += w[i]
+        use[i] = not use[i]
         print(ans)
 
 

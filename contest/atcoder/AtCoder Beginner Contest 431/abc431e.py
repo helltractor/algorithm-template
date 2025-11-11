@@ -108,19 +108,46 @@ if ConstType:
 
 
 def helltractor():
+    rd = {d: i for i, d in enumerate(D4)}
+    B = [2, 3, 0, 1]
+    C = [3, 2, 1, 0]
     for _ in range(II()):
-        n = II()
-        a = LII()
-        ans = 0
-        pos = [[] for _ in range(n + 1)]
-        for i, v in enumerate(a):
-            pos[v].append(i)
-        for i in range(1, n):
-            for j in range(len(pos[i]) - 1, -1, -1):
-                if pos[i + 1] and pos[i][j] < pos[i + 1][-1]:
-                    pos[i + 1].pop()
-                    ans += 1
-        print(ans)
+        n, m = MII()
+        g = [LI() for _ in range(n)]
+
+        dis = [[[inf] * 4 for _ in range(m + 1)] for _ in range(n)]
+        dis[0][0][0] = 0
+        q = deque([(0, 0, 0)])
+        while q:
+            w, k, i = q.popleft()
+            x, y = k // m, k % m
+            if w > dis[x][y][i]:
+                continue
+            for c in "ABC":
+                delta = 0
+                if g[x][y] != c:
+                    delta += 1
+                dx, dy = D4[i]
+                if c == "B":
+                    dx, dy = D4[B[i]]
+                elif c == "C":
+                    dx, dy = D4[C[i]]
+                nx, ny = x + dx, y + dy
+                j = rd[(dx, dy)]
+                if nx == n - 1 and ny == m:
+                    dis[nx][ny][j] = fmin(dis[nx][ny][j], dis[x][y][i] + delta)
+                    continue
+                if (
+                    0 <= nx < n
+                    and 0 <= ny < m
+                    and dis[nx][ny][j] > dis[x][y][i] + delta
+                ):
+                    dis[nx][ny][j] = dis[x][y][i] + delta
+                    if delta == 0:
+                        q.appendleft((dis[nx][ny][j], nx * m + ny, j))
+                    else:
+                        q.append((dis[nx][ny][j], nx * m + ny, j))
+        print(dis[-1][-1][0])
 
 
 if __name__ == "__main__":

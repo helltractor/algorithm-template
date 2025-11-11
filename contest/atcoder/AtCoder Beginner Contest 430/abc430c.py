@@ -107,20 +107,37 @@ if ConstType:
     A, B = "Alice", "Bob"
 
 
+# pre[i + 1] - pre[j] >= a
+# i - j + 1 - (pre[i + 1] - pre[j]) < b
+# pre[i + 1] - pre[j] > i - j + 1 - b
 def helltractor():
-    for _ in range(II()):
-        n = II()
-        a = LII()
-        ans = 0
-        pos = [[] for _ in range(n + 1)]
-        for i, v in enumerate(a):
-            pos[v].append(i)
-        for i in range(1, n):
-            for j in range(len(pos[i]) - 1, -1, -1):
-                if pos[i + 1] and pos[i][j] < pos[i + 1][-1]:
-                    pos[i + 1].pop()
-                    ans += 1
-        print(ans)
+    n, a, b = MII()
+    s = LI()
+
+    ans = 0
+    pre_a = [0] * (n + 1)
+    pre_b = [0] * (n + 1)
+    for i, c in enumerate(s):
+        pre_a[i + 1] = pre_a[i]
+        pre_b[i + 1] = pre_b[i]
+        if c == "a":
+            pre_a[i + 1] += 1
+        else:
+            pre_b[i + 1] += 1
+
+    j = k = 0
+    for i in range(n):
+        # ra = bisect_left(pre_a, pre_a[i] + a, i + 1, n + 1)
+        # rb = bisect_left(pre_b, pre_b[i] + b, i + 1, n + 1)
+        # ans += fmax(0, rb - ra)
+        j = fmax(j, i)
+        k = fmax(k, i)
+        while j < n and pre_a[j + 1] - pre_a[i] < a:
+            j += 1
+        while k < n and pre_b[k + 1] - pre_b[i] < b:
+            k += 1
+        ans += fmax(0, k - j)
+    print(ans)
 
 
 if __name__ == "__main__":

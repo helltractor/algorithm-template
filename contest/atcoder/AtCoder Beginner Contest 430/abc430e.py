@@ -107,19 +107,48 @@ if ConstType:
     A, B = "Alice", "Bob"
 
 
+class StringHash:
+    def __init__(self, s: str) -> None:
+        """字符串哈希，用O(n)时间预处理，用O(1)时间获取段的哈希值"""
+        self.n = n = len(s)
+        self.BASE = BASE = 131313  # 进制 31,131,13131
+        self.MOD = MOD = 10**13 + 7  # 10**13+37 10**13+51,10**13+99
+        self.h = h = [0] * (n + 1)
+        self.p = p = [1] * (n + 1)
+        for i in range(1, n + 1):
+            p[i] = (p[i - 1] * BASE) % MOD
+            h[i] = (h[i - 1] * BASE + ord(s[i - 1])) % MOD
+
+    def get_hash(self, l: int, r: int) -> int:
+        """用O(1)时间获取闭区间[l,r]（即s[l:r]）的哈希值，比切片要快"""
+        return (self.h[r + 1] - self.h[l] * self.p[r - l + 1]) % self.MOD
+
+    def get_addhash(self, l1: int, r1: int, l2: int, r2: int) -> int:
+        """获取 s[l1:r1+1] 和 s[l2:r2+1] 拼接的哈希值，要求不能有重叠部分，且有先后顺序"""
+        return (
+            self.get_hash(l1, r1) * self.p[r2 - l2 + 1] + self.get_hash(l2, r2)
+        ) % self.MOD
+
+
 def helltractor():
     for _ in range(II()):
-        n = II()
-        a = LII()
-        ans = 0
-        pos = [[] for _ in range(n + 1)]
-        for i, v in enumerate(a):
-            pos[v].append(i)
-        for i in range(1, n):
-            for j in range(len(pos[i]) - 1, -1, -1):
-                if pos[i + 1] and pos[i][j] < pos[i + 1][-1]:
-                    pos[i + 1].pop()
-                    ans += 1
+        s = I()
+        t = I()
+        if s == t:
+            print(0)
+            continue
+        n = len(s)
+        sh = StringHash(s)
+        th = StringHash(t)
+        ans = -1
+        for i in range(n):
+            # if sh.get_hash(0, i) == th.get_hash(n - i - 1, n - 1) and \
+            # sh.get_hash(i + 1, n - 1) == th.get_hash(0, n - i - 2):
+            #     ans = i + 1
+            #     break
+            if sh.get_addhash(i + 1, n - 1, 0, i) == th.get_hash(0, n - 1):
+                ans = i + 1
+                break
         print(ans)
 
 

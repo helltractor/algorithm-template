@@ -108,19 +108,22 @@ if ConstType:
 
 
 def helltractor():
-    for _ in range(II()):
-        n = II()
-        a = LII()
-        ans = 0
-        pos = [[] for _ in range(n + 1)]
-        for i, v in enumerate(a):
-            pos[v].append(i)
-        for i in range(1, n):
-            for j in range(len(pos[i]) - 1, -1, -1):
-                if pos[i + 1] and pos[i][j] < pos[i + 1][-1]:
-                    pos[i + 1].pop()
-                    ans += 1
-        print(ans)
+    n, m, k = MII()
+    h = LII()
+    b = LII()
+    h.sort()
+    b.sort()
+    ans = 0
+    i = 0
+    j = 0
+    while i < n and j < m:
+        while j < m and b[j] < h[i]:
+            j += 1
+        if j < m and b[j] >= h[i]:
+            j += 1
+            i += 1
+            ans += 1
+    print(Y if ans >= k else N)
 
 
 if __name__ == "__main__":

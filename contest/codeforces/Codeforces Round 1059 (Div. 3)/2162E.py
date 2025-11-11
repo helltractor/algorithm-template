@@ -112,28 +112,20 @@ def helltractor():
     for _ in range(II()):
         n, k = MII()
         a = LII()
-        st = set(a)
-        vis = [False] * (n + 1)
-        res = []
-        for i in range(1, n + 1):
-            if i not in st:
-                vis[i] = True
-                res.append(i)
+        vis = [0] * (n + 1)
+        for x in a:
+            vis[x] = 1
+        res = [i for i in range(1, n + 1) if not vis[i]]
+        res1 = [i for i in range(1, n + 1) if vis[i]]
 
-        res1 = []
-        if len(res) <= 2:
-            for i in range(n - 1, -1, -1):
-                if len(res1) >= 3 - len(res):
-                    break
-                if not vis[a[i]]:
-                    res1.append(a[i])
-                    vis[a[i]] = True
-    
-        res.extend(reversed(res1))
-        ans = []
-        while k:
-            ans.extend(res[:k])
-            k -= len(res[:k])
+        if len(res) >= 2:
+            ans = (res + res1)[:k]
+        elif len(res) == 1:
+            if a[-1] == res1[0]:
+                res1 = res1[::-1]
+            ans = (res + res1)[:k]
+        else:
+            ans = a[:k]
         print(*ans)
 
 

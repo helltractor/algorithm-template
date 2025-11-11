@@ -1,7 +1,7 @@
 ImportType = InputType = ConstType = 1
 DecoratorType = FunctionType = 1
 if ImportType:
-    import os, sys, random
+    import os, sys, random, typing
     from random import randint, choice, shuffle
     from copy import deepcopy
     from io import BytesIO, IOBase
@@ -107,20 +107,95 @@ if ConstType:
     A, B = "Alice", "Bob"
 
 
+# 1, 2, ..., n + 1
 def helltractor():
-    for _ in range(II()):
-        n = II()
-        a = LII()
-        ans = 0
-        pos = [[] for _ in range(n + 1)]
-        for i, v in enumerate(a):
-            pos[v].append(i)
-        for i in range(1, n):
-            for j in range(len(pos[i]) - 1, -1, -1):
-                if pos[i + 1] and pos[i][j] < pos[i + 1][-1]:
-                    pos[i + 1].pop()
-                    ans += 1
-        print(ans)
+    n = II()
+    a = LII()
+    a.append(0)
+    b = sorted(a)
+    d = {v: i for i, v in enumerate(b, 1)}
+    rd = {i: v for i, v in enumerate(b, 1)}
+    l = list(range(-1, n + 2))
+    r = list(range(1, n + 4))
+    lmn = [inf] * (n + 3)
+    rmn = [inf] * (n + 3)
+    res = 0
+    for v in b:
+        i = d[v]
+        if l[i] >= 1:
+            lmn[i] = v - rd[l[i]]
+        if r[i] <= n + 1:
+            rmn[i] = rd[r[i]] - v
+        res += fmin(lmn[i], rmn[i])
+
+    ans = []
+    for v in reversed(a):
+        i = d[v]
+        ans.append(res)
+        res -= fmin(lmn[i], rmn[i])
+        lidx = l[i]
+        ridx = r[i]
+        if lidx >= 1:
+            res -= fmin(lmn[lidx], rmn[lidx])
+        else:
+            res -= rmn[lidx]
+        if ridx <= n + 1:
+            res -= fmin(lmn[ridx], rmn[ridx])
+        else:
+            res -= lmn[ridx]
+
+        r[lidx] = ridx
+        l[ridx] = lidx
+
+
+# 1, 2, ..., n + 1
+def helltractor():
+    n = II()
+    a = LII()
+    b = sorted(a + [0])
+    d = {v: i for i, v in enumerate(b, 1)}
+    rd = {i: v for i, v in enumerate(b, 1)}
+
+    res = 0
+    l = list(range(-1, n + 2))
+    r = list(range(1, n + 4))
+    lmn = [inf] * (n + 3)
+    rmn = [inf] * (n + 3)
+    for v in b:
+        i = d[v]
+        if l[i] >= 1:
+            lmn[i] = v - rd[l[i]]
+        if r[i] <= n + 1:
+            rmn[i] = rd[r[i]] - v
+        res += fmin(lmn[i], rmn[i])
+
+    ans = []
+    for v in reversed(a):
+        ans.append(res)
+        i = d[v]
+        res -= fmin(lmn[i], rmn[i])
+        lidx = l[i]
+        ridx = r[i]
+        if lidx >= 0:
+            res -= fmin(lmn[lidx], rmn[lidx])
+        if ridx <= n + 1:
+            res -= fmin(lmn[ridx], rmn[ridx])
+
+        r[lidx] = ridx
+        l[ridx] = lidx
+        if lidx >= 1:
+            rmn[lidx] = inf
+            if ridx <= n + 1:
+                rmn[lidx] = rd[ridx] - rd[lidx]
+            res += fmin(lmn[lidx], rmn[lidx])
+
+        if ridx <= n + 1:
+            lmn[ridx] = inf
+            if lidx >= 1:
+                lmn[ridx] = rd[ridx] - rd[lidx]
+            res += fmin(lmn[ridx], rmn[ridx])
+
+    print("\n".join(map(str, reversed(ans))))
 
 
 if __name__ == "__main__":
