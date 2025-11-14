@@ -35,8 +35,7 @@ class FenwickTree2D:
         self.t2 = [[0] * (n + 1) for _ in range(m + 1)]
         self.t3 = [[0] * (n + 1) for _ in range(m + 1)]
         self.t4 = [[0] * (n + 1) for _ in range(m + 1)]
-        return
-
+    
     def _add(self, x: int, y: int, val: int) -> None:
         # index start from 1 and single point add val and val cam be any integer
         i = x
@@ -49,16 +48,14 @@ class FenwickTree2D:
                 self.t4[i][j] += val * x * y
                 j += j & -j
             i += i & -i
-        return
-
+    
     def range_add(self, x1: int, y1: int, x2: int, y2: int, val: int) -> None:
         # index start from 1 and left up corner is (x1, y1) and right down corner is (x2, y2) and val can be any integer
         self._add(x1, y1, val)
         self._add(x1, y2 + 1, -val)
         self._add(x2 + 1, y1, -val)
         self._add(x2 + 1, y2 + 1, val)
-        return
-
+    
     def _query(self, x: int, y: int) -> int:
         # index start from 1 and query the sum(sum(g[:y]) for g in grid[:x]) which is 0-index
         assert 0 <= x <= self.m and 0 <= y <= self.n

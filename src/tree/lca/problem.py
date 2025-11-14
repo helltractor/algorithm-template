@@ -60,4 +60,4 @@ class Solution:
                     print(
                         3 * pow(2, g.depth[lca_xy] + abs(diff_x - diff_y), MOD1) % MOD1
                     )
-        return
+        

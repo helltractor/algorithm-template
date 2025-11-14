@@ -16,4 +16,3 @@ class Solution:
         for i in range(1, n):
             ans -= suffix_array.height[i]
         print(ans)
-        return

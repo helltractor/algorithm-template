@@ -4,7 +4,7 @@
 from typing import List
 
 
-# @link: https://leetcode.cn/problems/kth-ancestor-of-a-tree-x/solutions/2305895/mo-ban-jiang-jie-shu-shang-bei-zeng-suan-v3rw/
+# @Link: https://leetcode.cn/problems/kth-ancestor-of-a-tree-x/solutions/2305895/mo-ban-jiang-jie-shu-shang-bei-zeng-suan-v3rw/
 class LowestCommonAncestor:
     __slots__ = ["depth", "pa"]
 
@@ -55,7 +55,7 @@ class LowestCommonAncestor:
         return self.pa[x][0]
 
 
-# @link: https://leetcode.cn/problems/find-weighted-median-node-in-tree/solutions/3700556/mo-ban-zui-jin-gong-gong-zu-xian-lcapyth-6ekj/
+# @Link: https://leetcode.cn/problems/find-weighted-median-node-in-tree/solutions/3700556/mo-ban-zui-jin-gong-gong-zu-xian-lcapyth-6ekj/
 class LcaWithWeight:
     __slots__ = ["depth", "dis", "pa", "m"]
 

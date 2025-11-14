@@ -5,8 +5,11 @@ from collections import Counter
 from itertools import pairwise
 from typing import List
 
-from util.io import MII
+from util.io import MII, LII
 from math.matrix_power.template import MatrixPower
+
+fmax = lambda x, y: x if x > y else y
+fmin = lambda x, y: x if x < y else y
 
 
 class Solution:
@@ -64,7 +67,7 @@ class Solution:
 
     def lc3700_1(self, n: int, l: int, r: int) -> int:
         """
-        link:https://leetcode.cn/problems/number-of-zigzag-arrays-ii/
+        link: https://leetcode.cn/problems/number-of-zigzag-arrays-ii/
         """
         m = r - l + 1
         mat = [[0] * (2 * m) for _ in range(2 * m)]
@@ -84,7 +87,7 @@ class Solution:
 
     def lc3700_2(self, n: int, l: int, r: int) -> int:
         """
-        link:https://leetcode.cn/problems/number-of-zigzag-arrays-ii/
+        link: https://leetcode.cn/problems/number-of-zigzag-arrays-ii/
         """
         m = r - l
         mat = [[0] * m for _ in range(m)]
@@ -97,7 +100,7 @@ class Solution:
         ans = sum(sum(row) for row in res)
         return 2 * ans % 1_000_000_007
 
-    def cf93d(self):
+    def cf93d():
         """
         link: https://codeforces.com/problemset/problem/93/D
         """
@@ -134,3 +137,20 @@ class Solution:
 
         ans = (cal(R) - cal(L - 1)) % 1_000_000_007
         print(ans)
+
+    def cf821e():
+        """
+        link: https://codeforces.com/problemset/problem/821/E
+        """
+        n, k = MII()
+        a = [LII() for _ in range(n)]
+        f0 = [[0] for _ in range(16)]
+        f0[0][0] = 1
+        for l, r, c in a:
+            d = fmin(r, k) - l
+            mat = [[0] * 16 for _ in range(16)]
+            for i in range(c + 1):
+                for j in range(fmax(i - 1, 0), fmin(i + 1, c) + 1):
+                    mat[i][j] = 1
+            f0 = MatrixPower.matrix_power(mat, d, f0)
+        print(f0[0][0])

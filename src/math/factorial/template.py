@@ -24,7 +24,7 @@ class Factorial:
 
     def comb(self, n: int, r: int) -> int:
         return self.fact[n] * self.finv[r] % self.mod * self.finv[n - r] % self.mod if n >= r >= 0 else 0
-    
+
     def factorial(self, n: int) -> int:
         return self.fact[n]
 

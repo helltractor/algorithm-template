@@ -13,7 +13,7 @@ class SuffixArray:
         self.rk = self._rk(self.sa)  # 字符串中的每个位置i，其对应的后缀在后缀数组中的排名为rk[i]，排名从0开始
         self.height = self._height(s)  # 第i小的后缀与它前一名的后缀的最长公共前缀，其他地方也可能交lcp
         self.height[0] = 0  # 在字符串为单一字符构成时(长度为1也算),heigh[0]会出错成1，按照定义应该为0
-        
+    
     def sa_naive(self, s):  # 实现了最朴素的后缀数组构建算法，其时间复杂度为 O(n^2 log n)，适用于小规模字符串。
         n = len(s)
         sa = list(range(n))

@@ -93,7 +93,7 @@ class ZeroOneTrie:
                 bit ^= 1
             cur = cur.son[bit]
         return ans
-    
+
     def min_xor(self, val: int) -> int:
         """返回字典树中与 val 异或结果最小的值"""
         cur = self

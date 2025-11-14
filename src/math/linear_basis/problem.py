@@ -1,5 +1,5 @@
 from typing import List
-from math.xor_basis.template import XorBasis
+from math.linear_basis.template import XorBasis
 
 
 class Solution:
