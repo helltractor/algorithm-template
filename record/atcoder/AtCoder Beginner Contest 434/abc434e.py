@@ -107,20 +107,55 @@ if ConstType:
     A, B = "Alice", "Bob"
 
 
+class UnionFind:
+    def __init__(self, n: int) -> None:
+        self.n = n
+        self.parent = list(range(n))
+        self.edge = [0] * n
+        self.size = [1] * n
+
+    def find(self, x: int) -> int:
+        root = x
+        while root != self.parent[root]:
+            root = self.parent[root]
+        while x != root:
+            x, self.parent[x] = self.parent[x], root
+        return root
+
+    def union(self, x: int, y: int) -> None:
+        x_root, y_root = self.find(x), self.find(y)
+        if x_root != y_root:
+            self.parent[y_root] = x_root
+            self.size[x_root] += self.size[y_root]
+            self.edge[x_root] += self.edge[y_root] + 1
+        else:
+            self.edge[x_root] += 1
+
+    def connected(self, x: int, y: int) -> bool:
+        return self.find(x) == self.find(y)
+
+
+# https://atcoder.jp/contests/abc434/editorial/14690
 def helltractor():
     n = II()
-    a = LII()
-    mx = 2 * 10**5
-    pre = [0] * (mx + 2)
-    for x in a:
-        pre[x + 1] += 1
-    for i in range(mx + 1):
-        pre[i + 1] += pre[i]
-    ans = [0] * (mx + 1)
-    for i in range(1, mx + 1):
-        for j in range(i, mx + 1, i):
-            ans[i] += j * (pre[fmin(mx + 1, j + i)] - pre[j])
-    print(max(ans[x] for x in a))
+    a = [LII() for _ in range(n)]
+    st = set()
+    for x, r in a:
+        st.add(x + r)
+        st.add(x - r)
+
+    m = len(st)
+    b = sorted(st)
+    rd = {x: i for i, x in enumerate(b)}
+    uf = UnionFind(m)
+    for x, r in a:
+        uf.union(rd[x + r], rd[x - r])
+
+    ans = 0
+    for i in range(m):
+        if uf.parent[i] == i:
+            ans += fmin(uf.edge[i], uf.size[i])
+    print(ans)
 
 
 if __name__ == "__main__":

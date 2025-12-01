@@ -93,7 +93,7 @@ def helltractor():
         n = II()
         cnt = prime_factor(n)
         mx = inf
-        for k, v in cnt.items():
+        for k in cnt.keys():
             x = n // k
             y = x * (k - 1)
             if y < mx:

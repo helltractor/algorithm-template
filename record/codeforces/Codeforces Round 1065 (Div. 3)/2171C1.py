@@ -108,19 +108,36 @@ if ConstType:
 
 
 def helltractor():
-    n = II()
-    a = LII()
-    mx = 2 * 10**5
-    pre = [0] * (mx + 2)
-    for x in a:
-        pre[x + 1] += 1
-    for i in range(mx + 1):
-        pre[i + 1] += pre[i]
-    ans = [0] * (mx + 1)
-    for i in range(1, mx + 1):
-        for j in range(i, mx + 1, i):
-            ans[i] += j * (pre[fmin(mx + 1, j + i)] - pre[j])
-    print(max(ans[x] for x in a))
+    for _ in range(II()):
+        n = II()
+        a = LII()
+        b = LII()
+        xor_a = xor_b = 0
+        for x, y in zip(a, b):
+            if x == y:
+                xor_a ^= x
+                xor_b ^= y
+                continue
+        for i, (x, y) in enumerate(zip(a, b)):
+            if x == y:
+                continue
+            if i % 2 == 0:
+                if xor_a > xor_b or (xor_a == xor_b and xor_a):
+                    xor_b ^= 1
+                else:
+                    xor_a ^= 1
+                continue
+            if xor_a < xor_b or (xor_a == xor_b and xor_b):
+                xor_a ^= 1
+            else:
+                xor_b ^= 1
+
+        if xor_a == xor_b:
+            print("Tie")
+        elif xor_a > xor_b:
+            print("Ajisai")
+        else:
+            print("Mai")
 
 
 if __name__ == "__main__":

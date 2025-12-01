@@ -108,19 +108,25 @@ if ConstType:
 
 
 def helltractor():
-    n = II()
-    a = LII()
-    mx = 2 * 10**5
-    pre = [0] * (mx + 2)
-    for x in a:
-        pre[x + 1] += 1
-    for i in range(mx + 1):
-        pre[i + 1] += pre[i]
-    ans = [0] * (mx + 1)
-    for i in range(1, mx + 1):
-        for j in range(i, mx + 1, i):
-            ans[i] += j * (pre[fmin(mx + 1, j + i)] - pre[j])
-    print(max(ans[x] for x in a))
+    for _ in range(II()):
+        n, k = MII()
+        a = LII()
+        cnt = [0] * (3 * n + 2)
+        for x in a:
+            cnt[x] += 1
+        res = ans = 0
+        s = 0
+        for i in range(1, 3 * n + 1):
+            s += cnt[i]
+            if s > k:
+                res += 1
+                s -= 1
+            else:
+                if res > ans:
+                    ans = res
+                res = 0
+                s = 0
+        print(ans)
 
 
 if __name__ == "__main__":
