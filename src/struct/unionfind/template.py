@@ -10,10 +10,12 @@ class UnionFind:
         self.size = [1] * n
 
     def find(self, x: int) -> int:
-        if self.parent[x] == x:
-            return x
-        self.parent[x] = self.find(self.parent[x])
-        return self.parent[x]
+        root = x
+        while root != self.parent[root]:
+            root = self.parent[root]
+        while x != root:
+            x, self.parent[x] = self.parent[x], root
+        return root
 
     def union_by_size(self, x: int, y: int) -> None:
         x_root, y_root = self.find(x), self.find(y)
