@@ -13,7 +13,7 @@ class Difference2D:
         self.diff = [[0] * (n + 2) for _ in range(m + 2)]
 
     def add(self, r1: int, c1: int, r2: int, c2: int, delta: int):
-        """index start from 0, range change delta"""
+        """下标从0开始，区间变化delta"""
         diff = self.diff
         diff[r1 + 1][c1 + 1] += delta
         diff[r1 + 1][c2 + 2] -= delta

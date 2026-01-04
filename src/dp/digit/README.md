@@ -1,6 +1,6 @@
-# Digit Dynamic Programing
+# 数位 DP（Digit Dynamic Programing）
 
-## 单边界数位 dp 模板 (v1.0)
+## 单边界数位 DP 模板 (v1.0)
 
 mask 表示前面选过的数字集合，换句话说，第 i 位要选的数字不能在 mask 中。
 
@@ -11,7 +11,7 @@ isNum 表示 i 前面的数位是否填了数字。若为假，则当前位可�
 > Author: 灵茶山艾府
 > Link: https://leetcode.cn/problems/numbers-with-repeated-digits/solutions/1748539/by-endlesscheng-c5vg/
 
-## 上下边界数位 dp 模板 (v2.0)
+## 上下边界数位 DP 模板 (v2.0)
 
 limitHigh 表示当前是否受到了 finish 的约束（我们要构造的数字不能超过 finish。若为真，则第 i 位填入的数字至多为 finish[i]，否则至多为 9，这个数记作 hi。如果在受到约束的情况下填了 finish[i]，那么后续填入的数字仍会受到 finish 的约束。例如 `finish=123`，那么 `i=0` 填的是 1 的话，`i=1` 的这一位至多填 2。
 
@@ -47,7 +47,7 @@ def dfs(i: int, limit_low: bool, limit_high: bool, is_num: bool) -> int:
     return res
 ```
 
-## 上下边界数位 dp 模板 (v2.1)
+## 上下边界数位 DP 模板 (v2.1)
 
 优化 is_num 参数。
 
