@@ -78,7 +78,7 @@ Y, N, A, B = "Yes", "No", "Alice", "Bob"
 def B():
     for _ in range(II()):
         n = II()
-        a = [list(I()) for _ in range(2)]
+        a = [LI() for _ in range(2)]
         ans = 0
         for i in range(2):
             for j in range(1, n - 1):
