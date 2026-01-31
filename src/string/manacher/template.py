@@ -5,19 +5,19 @@
 class Manacher:
     def __init__(self, s: str) -> None:
         self.s = s
-        self.halfLen = self.manacher(s)
+        self.half_len = self.manacher(s)
 
     @staticmethod
     def manacher(s: str) -> str:
         t = "#".join(f"^{s}$")
         n = len(t)
-        halfLen = [0] * n
+        half_len = [0] * n
         mid = r = 0
         for i in range(1, n - 1):
             if i < r:
-                halfLen[i] = min(r - i, halfLen[2 * mid - i])
-            while t[i + halfLen[i] + 1] == t[i - halfLen[i] - 1]:
-                halfLen[i] += 1
-            if i + halfLen[i] > r:
-                mid, r = i, i + halfLen[i]
-        return halfLen
+                half_len[i] = min(r - i, half_len[2 * mid - i])
+            while t[i + half_len[i] + 1] == t[i - half_len[i] - 1]:
+                half_len[i] += 1
+            if i + half_len[i] > r:
+                mid, r = i, i + half_len[i]
+        return half_len

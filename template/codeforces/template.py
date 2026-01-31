@@ -1,7 +1,7 @@
 ImportType = InputType = ConstType = 1
 DecoratorType = FunctionType = 1
 if ImportType:
-    import os, sys
+    import os, sys, typing
     from random import randint, choice, shuffle
     from copy import deepcopy
     from io import BytesIO, IOBase

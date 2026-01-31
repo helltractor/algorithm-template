@@ -11,16 +11,13 @@
 
 区间更新线段树 LazySegTree 比单点更新线段树 SegTree 多了懒标记以及懒标记上的操作。这就使得定义线段树基本操作时，除了元素类型 S、二元运算 op 和单位元 e 以外，还要定义区间修改的映射函数 mapping、映射函数的积 composition、以及映射不动点 id。简而言之：
 
-- `mapping`：定义区间修改的更新方式；
-- `composition`：定义懒标记的更新方式；
+- `mapping(f, x)`：定义区间修改的更新方式，f 表示懒标记，x 表示区间映射；
+- `composition(f, g)`：定义懒标记的更新方式，f 表示新懒标记，g 表示旧懒标记；
 - `id`：表示区间修改的懒标记。
 
 ## 模板解析
 
 ```python
-import typing
-
-
 class LazySegTree:
     def __init__(
             self,

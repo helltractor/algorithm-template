@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+from bisect import bisect_left
+from itertools import pairwise
 from math import gcd, inf
 from operator import add
 from typing import List, Tuple
@@ -191,3 +193,98 @@ class Solution:
             j = tree.max_right(0, lambda p: not (p[0] <= 0 and p[1] >= 0))
             ans = fmax(ans, i - j + 1)
         return ans
+
+    def lc3454(self, squares: List[List[int]]) -> float:
+        """
+        link: https://leetcode.cn/problems/separate-squares-ii
+        relike: https://leetcode.cn/problems/rectangle-area-ii
+        """
+        xs = []
+        events = []
+        for lx, y, l in squares:
+            rx = lx + l
+            xs.append(lx)
+            xs.append(rx)
+            events.append((y, lx, rx, 1))
+            events.append((y + l, lx, rx, -1))
+
+        xs = sorted(set(xs))
+        events.sort()
+
+        # sum_len, min_cnt
+        v = [(xs[i + 1] - xs[i], 0) for i in range(len(xs) - 1)]
+
+        def op(a, b):
+            min_cnt = min(a[1], b[1])
+            sum_len = 0
+            if a[1] == min_cnt:
+                sum_len += a[0]
+            if b[1] == min_cnt:
+                sum_len += b[0]
+            return sum_len, min_cnt
+
+        def mapping(f, x):
+            return x[0], x[1] + f
+
+        def composition(f, g):
+            return f + g
+
+        tree = LazySegmentTree(op, (0, 0), mapping, composition, 0, v)
+        records = []
+        tot_area = 0
+        for (y, lx, rx, delta), e2 in pairwise(events):
+            l = bisect_left(xs, lx)
+            r = bisect_left(xs, rx)
+            # [l, r)
+            tree.apply(l, r, delta)
+            sum_len, min_cnt = tree.all_prod()
+            cov_len = xs[-1] - xs[0] - (0 if min_cnt else sum_len)
+            records.append((tot_area, cov_len))
+            tot_area += cov_len * (e2[0] - y)
+
+        i = bisect_left(records, tot_area, key=lambda p: p[0] * 2) - 1
+        area, sum_len = records[i]
+        return events[i][0] + (tot_area - area * 2) / (sum_len * 2)
+
+    def abc441g():
+        n, q = MII()
+        qs = [LII() for _ in range(q)]
+
+        def op(a, b):
+            return fmax(a[0], b[0]), a[1] + b[1], a[2] + b[2]
+
+        def mapping(f, x):
+            a, b, c = x
+            if f[0] % 2:
+                if c == 0:
+                    return 0, c, b
+                return f[1], c, b
+            if b == 0:
+                return 0, b, c
+            if f[0] == 0:
+                return a + f[1], b, c
+            return f[1], b, c
+
+        def composition(f, g):
+            if f[0] == 0 and g[0] == 0:
+                return 0, f[1] + g[1]
+            if f[0] == 0 and g[0] > 0:
+                return g[0], f[1] + g[1]
+            if f[0] >= 0 and g[0] == 0:
+                return f
+            return f[0] + g[0], f[1]
+
+        e = (-inf, 0, 0)
+        id = (0, 0)  # 翻转次数，新增丸数
+        v = [(0, 1, 0) for _ in range(n)]
+
+        tree = LazySegmentTree(op, e, mapping, composition, id, v)
+
+        for row in qs:
+            l, r = row[1], row[2]
+            if row[0] == 1:
+                tree.apply(l - 1, r, (0, row[-1]))
+            elif row[0] == 2:
+                tree.apply(l - 1, r, (1, 0))
+            else:
+                print(tree.prod(l - 1, r)[0])
