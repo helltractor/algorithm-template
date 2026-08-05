@@ -116,15 +116,30 @@ def helltractor():
         n = II()
         a = LII()
         b = LII()
-        ha, hb = -1, -2
-        vis = set()
-        for i in range(n - 1, -2, -1):
-            if a[i] == ha or b[i] == hb or a[i] in vis or b[i] in vis or a[i] == b[i]:
-                break
-            vis.add(ha)
-            vis.add(hb)
-            ha, hb = a[i], b[i]
-        print(i + 1)
+        ans = 0
+        d1 = [[[0, 0] for _ in range(2)] for _ in range(n + 1)]
+        d2 = [[[0, 0] for _ in range(2)] for _ in range(n + 1)]
+        for i, (x, y) in enumerate(zip(a, b), 1):
+            d1[x][i % 2][0] = d1[x][i % 2][1]
+            d1[x][i % 2][1] = i
+            d2[y][i % 2][0] = d2[y][i % 2][1]
+            d2[y][i % 2][1] = i
+
+        for k in range(1, n + 1):
+            ans = fmax(ans, fmin(d1[k][0][1], d2[k][0][1]))
+            ans = fmax(ans, fmin(d1[k][1][1], d2[k][1][1]))
+            if abs(d1[k][0][1] - d2[k][1][1]) > 1:
+                ans = fmax(ans, fmin(d1[k][0][1], d2[k][1][1]))
+            if abs(d1[k][1][1] - d2[k][0][1]) > 1:
+                ans = fmax(ans, fmin(d1[k][1][1], d2[k][0][1]))
+            ans = fmax(ans, fmin(d1[k][0][1], d1[k][1][1]))
+            ans = fmax(ans, fmin(d2[k][0][1], d2[k][1][1]))
+            for i in range(2):
+                if abs(d1[k][i][1] - d1[k][i][0]) > 1:
+                    ans = fmax(ans, fmin(d1[k][i][1], d1[k][i][0]))
+                if abs(d2[k][i][1] - d2[k][i][0]) > 1:
+                    ans = fmax(ans, fmin(d2[k][i][1], d2[k][i][0]))
+        print(ans)
 
 
 if __name__ == "__main__":
