@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 from functools import lru_cache
 
@@ -31,7 +30,7 @@ class DigitDynamicProgramming:
         return ans
 
     @staticmethod
-    def count_numbers_in_range(low: int, high: int) -> int:
+    def count_distinct_digit_numbers_in_range(low: int, high: int) -> int:
         n = len(str(high))
         diff = n - len(str(low))
         low = list(map(int, str(low).zfill(n)))

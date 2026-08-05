@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 from typing import List
 from util.io.fast_io import II, LGMI, MOD1
-from src.tree.lca.template import LcaWithWeight, LowestCommonAncestor
+from tree.lca.template import LcaWithWeight, LowestCommonAncestor
 
 
 class Solution:

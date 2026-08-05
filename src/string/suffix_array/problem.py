@@ -1,4 +1,4 @@
-from src.string.suffix_array.template import SuffixArray
+from string.suffix_array.template import SuffixArray
 from util.io.fast_io import II
 
 

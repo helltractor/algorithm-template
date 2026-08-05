@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 import time
 import unittest
@@ -8,17 +7,17 @@ from src.math.prime_factor.template import Primes
 
 
 class TestGeneral(unittest.TestCase):
-    n = 2 * pow(10, 4)
+    n = 2 * 10**4
 
     def test_primes_linear(self):
         start_time = time.time()
-        primes = Primes.primes_linear(self.n)
+        Primes.primes_linear(self.n)
         end_time = time.time()
         print("primes_linear:", end_time - start_time)
 
     def test_primes_ealich(self):
         start_time = time.time()
-        primes = Primes.primes_ealich(self.n)
+        Primes.primes_ealich(self.n)
         end_time = time.time()
         print("primes_ealich:", end_time - start_time)
 

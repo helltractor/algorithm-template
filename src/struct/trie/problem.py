@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 from functools import cache
 from struct.trie.template import Trie, ZeroOneTrie

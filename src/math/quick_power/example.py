@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 import unittest
+
 from src.math.quick_power.template import FastPower, BlockFastPower
 
 
 class TestGeneral(unittest.TestCase):
-
     def test_pow(self):
         pow = FastPower().pow
         self.assertEqual(pow(2, 10), 1024)

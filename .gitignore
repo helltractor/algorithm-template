@@ -8,12 +8,12 @@
 .idea/
 
 ## Uv files
-uv.lock
-.python-version
-pyproject.toml
+# uv.lock, .python-version, pyproject.toml are required for project reproducibility
+# - do NOT ignore them
 
 ## Cph files
 .cph/
 
 ## Visual Studio Code files
 .vscode/
+

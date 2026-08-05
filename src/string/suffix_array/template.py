@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-from collections import defaultdict
 
 
 class SuffixArray:
@@ -166,16 +163,6 @@ class SuffixArray:
         if type(s) is str:
             s = [ord(c) for c in s]
         return self.sa_is(s, upper)
-
-    def _count_sort(self, ls):
-        c = defaultdict(list)
-        for i, v in enumerate(ls):
-            c[v].append(i)
-        ans = []
-        for v in sorted(list(c.keys())):
-            for k in c[v]:
-                ans.append((k, v))
-        return ans
 
     def _rk(self, sa):
         rk = [0 for _ in sa]

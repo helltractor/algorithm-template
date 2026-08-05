@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 # @Author: liupengsay
 # @Link: https://github.com/liupengsay/PyIsTheBestLang/src/struct/sparse_table/template.py
 

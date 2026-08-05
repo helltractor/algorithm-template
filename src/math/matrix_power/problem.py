@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 from collections import Counter
 from itertools import pairwise
 from typing import List
 
-from util.io import MII, LII
+from util.io.fast_io import MII, LII
 from math.matrix_power.template import MatrixPower
 
 fmax = lambda x, y: x if x > y else y

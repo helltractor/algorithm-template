@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 
 class Trie:
@@ -47,12 +46,13 @@ class Trie:
         if node is None:
             return False
 
-        should_delete = self._delete(node, word, index + 1)
+        self._delete(node, word, index + 1)
         node.cnt -= 1
-        if should_delete:
+        empty = node.cnt == 0 and not node.is_end
+        if empty:
             del cur.son[char]
 
-        return node.cnt == 0 and not node.is_end
+        return empty
 
     def delete(self, word: str) -> None:
         self._delete(self, word, 0)

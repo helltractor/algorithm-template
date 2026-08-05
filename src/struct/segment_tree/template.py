@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 # @Author: not522
 # @Link: https://github.com/not522/ac-library-python
 

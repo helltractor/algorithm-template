@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 # @Link: https://github.com/981377660LMT/algorithm-study/blob/master/19_%E6%95%B0%E5%AD%A6/%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97/%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82/matqpow.py
 
 import numpy as np
@@ -56,15 +55,3 @@ class MatrixPower:
             n >>= 1
         return res.tolist()
 
-    @staticmethod
-    def matrix_power_numpy(
-        base: np.ndarray, n: int, f0: np.ndarray, mod: int = 1_000_000_007
-    ) -> np.ndarray:
-        """Raise matrix base to the power of n under modulo using numpy, base ^ n @ f0."""
-        res = f0
-        while n:
-            if n & 1:
-                res = base @ res % mod
-            base = base @ base % mod
-            n >>= 1
-        return res
